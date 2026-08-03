@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Your Name — Portfolio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,700;1,9..144,500&family=Nunito:wght@400;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- ===== NAV ===== -->
+  <nav class="lifebuoy-nav" aria-label="Main navigation">
+    <a href="#hero" class="nav-logo">YN</a>
+    <button class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="navLinks" aria-label="Toggle menu">
+      <span></span><span></span><span></span>
+    </button>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="#about">About</a></li>
+      <li><a href="#achievements">Achievements</a></li>
+      <li><a href="#activities">Course Activities</a></li>
+      <li><a href="#projects">Projects &amp; Skills</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
+
+  <!-- ===== HERO ===== -->
+  <header id="hero" class="hero">
+    <div class="sky-layer"></div>
+    <svg class="horizon horizon--far" viewBox="0 0 1440 200" preserveAspectRatio="none" aria-hidden="true">
+      <path d="M0,120 C240,60 480,160 720,110 C960,60 1200,150 1440,100 L1440,200 L0,200 Z"></path>
+    </svg>
+    <svg class="horizon horizon--near" viewBox="0 0 1440 200" preserveAspectRatio="none" aria-hidden="true">
+      <path d="M0,140 C300,180 600,100 900,150 C1100,180 1300,120 1440,150 L1440,200 L0,200 Z"></path>
+    </svg>
+    <div class="sun"></div>
+    <div class="hero-content">
+      <p class="eyebrow">// welcome to my shore</p>
+      <h1 class="hero-title">Your Name</h1>
+      <p class="hero-tagline">Developer, builder, still figuring out the tide — replace this with your own one-line intro.</p>
+      <a href="#about" class="scroll-cue" aria-label="Scroll to About section">
+        <span class="scroll-cue-dot"></span>
+      </a>
+    </div>
+  </header>
+
+  <main>
+
+    <!-- ===== ABOUT ===== -->
+    <section id="about" class="section section--hut">
+      <div class="section-inner about-grid">
+        <div class="hut-card">
+          <p class="eyebrow">01 — About Me</p>
+          <h2>Hi, I'm <span class="highlight">Your Name</span>.</h2>
+          <p>
+            Replace this paragraph with a real introduction: who you are, what you're
+            studying, what got you into tech, and what you're passionate about outside
+            of code. Keep it warm and personal — this is the first thing people read.
+          </p>
+          <p>
+            Add a second paragraph here about your tech journey so far — languages
+            you're learning, the kind of projects you enjoy, or what you want to build next.
+          </p>
+          <div class="shell-links">
+            <a href="https://github.com/your-username" class="shell-link" target="_blank" rel="noopener">
+              <span class="shell-icon">🐚</span> GitHub
+            </a>
+            <a href="https://linkedin.com/in/your-username" class="shell-link" target="_blank" rel="noopener">
+              <span class="shell-icon">🐚</span> LinkedIn
+            </a>
+            <a href="#" class="shell-link" target="_blank" rel="noopener">
+              <span class="shell-icon">🐚</span> Instagram
+            </a>
+            <a href="#" class="shell-link" target="_blank" rel="noopener">
+              <span class="shell-icon">🐚</span> X / Twitter
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== ACHIEVEMENTS ===== -->
+    <section id="achievements" class="section section--chest">
+      <div class="section-inner">
+        <p class="eyebrow">02 — Achievements &amp; Experience</p>
+        <h2>Treasure collected along the way</h2>
+        <div class="chest-grid">
+          <article class="chest-card">
+            <span class="chest-icon">🏆</span>
+            <h3>Award or Certification Name</h3>
+            <p>Short description of what this was, when you earned it, and why it mattered. Link to proof if you have it.</p>
+          </article>
+          <article class="chest-card">
+            <span class="chest-icon">🎖️</span>
+            <h3>Leadership Role or Experience</h3>
+            <p>Describe the role, the organization, and what you did or learned.</p>
+          </article>
+          <article class="chest-card">
+            <span class="chest-icon">📜</span>
+            <h3>Another Achievement</h3>
+            <p>Add as many of these cards as you need — copy the &lt;article&gt; block above.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== COURSE ACTIVITIES ===== -->
+    <section id="activities" class="section section--postcards">
+      <div class="section-inner">
+        <p class="eyebrow">03 — Course Activities</p>
+        <h2>Postcards from class</h2>
+        <div class="postcard-row">
+          <a href="#" class="postcard">
+            <span class="postcard-stamp">HTML 1.1</span>
+            <h3>Fashion Blog</h3>
+            <p>Link this to your Fashion Blog activity file.</p>
+          </a>
+          <a href="#" class="postcard">
+            <span class="postcard-stamp">HTML 1.2</span>
+            <h3>Wine Festival Schedule</h3>
+            <p>Link this to your Wine Festival Schedule activity file.</p>
+          </a>
+          <a href="#" class="postcard">
+            <span class="postcard-stamp">CSS 2.1</span>
+            <h3>Davies Burger</h3>
+            <p>Link this to your Davies Burger activity file.</p>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== PROJECTS & SKILLS ===== -->
+    <section id="projects" class="section section--islands">
+      <div class="section-inner">
+        <p class="eyebrow">04 — Projects &amp; Skills</p>
+        <h2>Islands worth visiting</h2>
+        <div class="island-grid">
+          <article class="island-card">
+            <h3>Project Name</h3>
+            <p>One or two sentences about what it does and why you built it.</p>
+            <div class="skill-tags">
+              <span>HTML</span><span>CSS</span><span>JavaScript</span>
+            </div>
+            <a href="#" class="island-link">View project →</a>
+          </article>
+          <article class="island-card">
+            <h3>Project Name</h3>
+            <p>One or two sentences about what it does and why you built it.</p>
+            <div class="skill-tags">
+              <span>Python</span><span>Flask</span>
+            </div>
+            <a href="#" class="island-link">View project →</a>
+          </article>
+          <article class="island-card">
+            <h3>Project Name</h3>
+            <p>One or two sentences about what it does and why you built it.</p>
+            <div class="skill-tags">
+              <span>React</span><span>Node</span>
+            </div>
+            <a href="#" class="island-link">View project →</a>
+          </article>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ===== FOOTER / CONTACT ===== -->
+  <footer id="contact" class="shoreline">
+    <svg class="horizon horizon--foot" viewBox="0 0 1440 200" preserveAspectRatio="none" aria-hidden="true">
+      <path d="M0,80 C300,140 700,40 1000,90 C1200,120 1300,70 1440,90 L1440,200 L0,200 Z"></path>
+    </svg>
+    <div class="shoreline-content">
+      <h2>Let's wash up on the same shore.</h2>
+      <p>Reach me at <a href="mailto:your.email@example.com">your.email@example.com</a></p>
+      <p class="repo-note">
+        View the source of this site on
+        <a href="https://github.com/your-username/your-username.github.io" target="_blank" rel="noopener">GitHub</a>.
+      </p>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
