@@ -51,7 +51,7 @@
   
   .eyebrow {
     font-family: var(--font-mono);
-    font-size: 3rem;
+    font-size: 0.8rem;
     letter-spacing: 0.08em;
     text-transform: uppercase;
     color: var(--coral);
@@ -163,13 +163,18 @@
     position: absolute;
     top: 22%;
     left: 50%;
-    transform: translateX(-50%);
     width: 140px;
     height: 140px;
     border-radius: 50%;
     background: radial-gradient(circle at 35% 35%, #FFE9B8, var(--coral) 70%);
     box-shadow: 0 0 80px 20px rgba(232, 146, 124, 0.45);
     z-index: -2;
+    animation: sun-bounce 4s ease-in-out infinite;
+  }
+
+  @keyframes sun-bounce {
+    0%, 100% { transform: translateX(-50%) translateY(0); }
+    50% { transform: translateX(-50%) translateY(-28px); }
   }
   
   .horizon {
@@ -179,8 +184,37 @@
     width: 100%;
     height: 35%;
     z-index: -1;
+    overflow: hidden;
   }
-  
+
+  .horizon-track {
+    display: flex;
+    width: 200%;
+    height: 100%;
+    animation: wave-flow 22s linear infinite;
+  }
+
+  .horizon-track svg {
+    width: 50%;
+    height: 100%;
+    flex-shrink: 0;
+    display: block;
+  }
+
+  .horizon--near .horizon-track {
+    animation-duration: 14s;
+    animation-direction: reverse;
+  }
+
+  .horizon--foot .horizon-track {
+    animation-duration: 18s;
+  }
+
+  @keyframes wave-flow {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+  }
+
   .horizon--far path { fill: rgba(126, 168, 201, 0.55); }
   .horizon--near path { fill: var(--sand-light); }
   
