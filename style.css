@@ -51,7 +51,7 @@
   
   .eyebrow {
     font-family: var(--font-mono);
-    font-size: 0.8rem;
+    font-size: 2rem;
     letter-spacing: 0.08em;
     text-transform: uppercase;
     color: var(--coral);
@@ -438,7 +438,7 @@
   
   .shoreline a { text-decoration: underline; }
   
-  .repo-note { font-size: 0.9rem; opacity: 0.85; }
+  .repo-note { font-size: 1.5rem; opacity: 0.85; }
   
   /* ===================================================
      RESPONSIVE
