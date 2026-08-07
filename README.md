@@ -1,10 +1,9 @@
 # My Portfolio — Art Xenos D. Guadalquiver
 
 ## Overview
-This repository contains my personal developer portfolio, built for [course/prelim name].
+This repository contains my personal developer portfolio, built for Web Development.
 It's a single-page site with a beach/sunset theme, showcasing my background, achievements,
-course activities, and projects — built with semantic HTML, CSS (Flexbox/Grid), and
-vanilla JavaScript.
+course activities, and projects — built with semantic HTML and CSS (Flexbox/Grid).
 
 ## Live Site
 🔗 [https://ArtXenos.github.io](https://ArtXenos.github.io)
