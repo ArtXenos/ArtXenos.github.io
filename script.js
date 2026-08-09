@@ -4,21 +4,21 @@
       craftsman: {
         title: "Craftsman — Carpentry",
         images: [
-          { src: "Portfolio/Craftsman-1.jpg" },
-          { src: "Portfolio/Craftsman-2.jpg" },
-          { src: "Portfolio/Craftsman-3.jpg" },
-          { src: "Portfolio/Craftsman-4.jpg" },
-          { src: "Portfolio/Craftsman-5.jpg" }
+          { src: "Portfolio/Craftsman1.jpg" },
+          { src: "Portfolio/Craftsman2.jpg" },
+          { src: "Portfolio/Craftsman3.jpg" },
+          { src: "Portfolio/Craftsman4.jpg" },
+          { src: "Portfolio/Craftsman5.jpg" }
         ]
       },
       "beach-manager": {
         title: "Beach Manager — Breezy Leaves Tiblawan",
         images: [
-          { src: "Portfolio/Beach-Manager-1.jpg" },
-          { src: "Portfolio/Beach-Manager-2.jpg" },
-          { src: "Portfolio/Beach-Manager-3.jpg" },
-          { src: "Portfolio/Beach-Manager-4.jpg" },
-          { src: "Portfolio/Beach-Manager-5.jpg" }
+          { src: "Portfolio/Beach1.jpg" },
+          { src: "Portfolio/Beach2.jpg" },
+          { src: "Portfolio/Beach3.jpg" },
+          { src: "Portfolio/Beach4.jpg" },
+          { src: "Portfolio/Beach5.png" }
         ]
       }
     };
