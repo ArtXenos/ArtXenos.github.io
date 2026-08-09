@@ -15,7 +15,7 @@ course activities, and projects — built with semantic HTML and CSS (Flexbox/Gr
 - **Projects & Skills** — a selection of projects I've built
 
 ## Tools Used
-- Hand-written HTML5, CSS3 (Flexbox/Grid), and JavaScript..
+- Hand-written HTML5, CSS3 (Flexbox/Grid), and JavaScript.
 - Fonts via Google Fonts (Fraunces, Nunito, Space Mono)
 - Assisted by Claude for design brainstorming and troubleshooting — see commit
   history for details on what was iterated on
