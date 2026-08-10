@@ -41,8 +41,7 @@ sections.forEach(section => observer.observe(section));
                 { src: "Portfolio/UFY1.png"},
                 { src: "Portfolio/UFY2.jpg"},
                 { src: "Portfolio/UFY3.jpg"},
-                { src: "Portfolio/UFY4.jpg"},
-                { src: "Portfolio/UFY5.jpg"}
+                { src: "Portfolio/UFY4.png"},
             ]
         },
         honors: {
