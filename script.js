@@ -39,7 +39,7 @@ sections.forEach(section => observer.observe(section));
             title: "Vice President — United Foursquare Youth",
             images: [
                 { src: "Portfolio/UFY1.png"},
-                { src: "Portfolio/UFY2.jpg"},
+                { src: "Portfolio/UFY2(1).jpg"},
                 { src: "Portfolio/UFY3.jpg"},
                 { src: "Portfolio/UFY4.png"},
                 { src: "Portfolio/UFY5.jpg"}
