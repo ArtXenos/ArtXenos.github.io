@@ -38,11 +38,11 @@ sections.forEach(section => observer.observe(section));
         ufy: {
             title: "Vice President — United Foursquare Youth",
             images: [
-                { src: "Portfolio/UFY-1.jpg", caption: "Leading a youth program session" },
-                { src: "Portfolio/UFY-2.jpg", caption: "With the UFY leadership team" },
-                { src: "Portfolio/UFY-3.jpg", caption: "Hosting a church youth event" },
-                { src: "Portfolio/UFY-4.jpg", caption: "Facilitating a youth activity" },
-                { src: "Portfolio/UFY-5.jpg", caption: "Group photo with UFY members" }
+                { src: "Portfolio/UFY1.jpg"},
+                { src: "Portfolio/UFY2.jpg"},
+                { src: "Portfolio/UFY3.jpg"},
+                { src: "Portfolio/UFY4.jpg"},
+                { src: "Portfolio/UFY5.jpg"}
             ]
         },
         honors: {
@@ -58,11 +58,11 @@ sections.forEach(section => observer.observe(section));
         cashier: {
             title: "Cashier Experience — Tiblawan Hardware",
             images: [
-                { src: "Portfolio/Cashier-1.jpg", caption: "At the cashier counter" },
-                { src: "Portfolio/Cashier-2.jpg", caption: "Handling a customer transaction" },
-                { src: "Portfolio/Cashier-3.jpg", caption: "Balancing the cash register" },
-                { src: "Portfolio/Cashier-4.jpg", caption: "Working the store floor" },
-                { src: "Portfolio/Cashier-5.jpg", caption: "At Tiblawan Hardware" }
+                { src: "Portfolio/Cashier1.jpg"},
+                { src: "Portfolio/Cashier2.jpeg"},
+                { src: "Portfolio/Cashier3.png"},
+                { src: "Portfolio/Cashier4.jpeg"},
+                { src: "Portfolio/Cashier5.jpeg"}
             ]
         },
       craftsman: {
