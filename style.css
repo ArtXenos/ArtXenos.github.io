@@ -139,6 +139,7 @@ a { color: inherit; text-decoration: none; }
 =================================================== */
 .hero {
   position: relative;
+  z-index: 0;
   min-height: 100vh;
   display: flex;
   align-items: center;
@@ -269,6 +270,54 @@ a { color: inherit; text-decoration: none; }
 @keyframes bob {
   0%, 100% { transform: translateY(-10px); opacity: 1; }
   50% { transform: translateY(10px); opacity: 0.4; }
+}
+
+/* ===================================================
+   DRAGGABLE BEACH BALL
+=================================================== */
+.beach-ball {
+  --ball-size: 60px;
+  position: absolute;
+  left: 14%;
+  bottom: 9%;
+  width: var(--ball-size);
+  height: var(--ball-size);
+  border-radius: 50%;
+  z-index: 5;
+  cursor: grab;
+  touch-action: none;
+  user-select: none;
+  background:
+    radial-gradient(circle at 32% 28%, rgba(255,255,255,0.55), transparent 45%),
+    conic-gradient(
+      from 0deg,
+      var(--coral) 0deg 60deg,
+      var(--white) 60deg 120deg,
+      var(--blue) 120deg 180deg,
+      var(--white) 180deg 240deg,
+      var(--peach) 240deg 300deg,
+      var(--white) 300deg 360deg
+    );
+  box-shadow: 0 10px 20px rgba(61, 51, 82, 0.3);
+  animation: ball-ride 6s ease-in-out infinite;
+}
+
+.beach-ball:focus-visible {
+  outline: 3px solid var(--white);
+  outline-offset: 3px;
+}
+
+.beach-ball.is-dragging {
+  animation: none;
+  cursor: grabbing;
+}
+
+@keyframes ball-ride {
+  0%   { transform: translate(0, 0) rotate(0deg); }
+  25%  { transform: translate(16px, -14px) rotate(10deg); }
+  50%  { transform: translate(0, -22px) rotate(0deg); }
+  75%  { transform: translate(-16px, -14px) rotate(-10deg); }
+  100% { transform: translate(0, 0) rotate(0deg); }
 }
 
 /* ===================================================
@@ -511,15 +560,13 @@ a { color: inherit; text-decoration: none; }
 =================================================== */
 .shoreline {
   position: relative;
+  z-index: 0;
   background: var(--blue);
   color: var(--white);
-  padding-top: 6rem;
+  padding-top: 4rem;
   text-align: center;
   overflow: hidden;
 }
-
-.horizon--foot path { fill: var(--sand-light); }
-.horizon--foot { top: 0; bottom: auto; height: 30%; }
 
 .shoreline-content {
   position: relative;

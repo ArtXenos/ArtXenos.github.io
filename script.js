@@ -32,6 +32,179 @@ const observer = new IntersectionObserver((entries) => {
 
 sections.forEach(section => observer.observe(section));
 
+// ===== Draggable, throwable, bounceable beach ball =====
+(function () {
+  const ball = document.getElementById('beachBall');
+  const hero = document.getElementById('hero');
+  if (!ball || !hero) return;
+
+  const GRAVITY = 0.6;
+  const RESTITUTION = 0.62;
+  const FLOOR_FRICTION = 0.85;
+  const AIR_DRAG = 0.995;
+  const REST_SPEED = 0.15;
+  const MAX_LAUNCH_SPEED = 40;
+
+  let dragging = false;
+  let offsetX = 0;
+  let offsetY = 0;
+  let moveSamples = [];
+  let physicsFrame = null;
+
+  function isOverWave(x, y) {
+    const rect = hero.getBoundingClientRect();
+    const waveTop = rect.top + rect.height * 0.62;
+    return x >= rect.left && x <= rect.right && y >= waveTop && y <= rect.bottom;
+  }
+
+  function recordSample(x, y) {
+    const t = performance.now();
+    moveSamples.push({ x, y, t });
+    const cutoff = t - 120;
+    while (moveSamples.length && moveSamples[0].t < cutoff) moveSamples.shift();
+  }
+
+  function getLaunchVelocity() {
+    if (moveSamples.length < 2) return { vx: 0, vy: 0 };
+    const first = moveSamples[0];
+    const last = moveSamples[moveSamples.length - 1];
+    const dt = Math.max(last.t - first.t, 1);
+    let vx = ((last.x - first.x) / dt) * 16;
+    let vy = ((last.y - first.y) / dt) * 16;
+    vx = Math.max(-MAX_LAUNCH_SPEED, Math.min(MAX_LAUNCH_SPEED, vx));
+    vy = Math.max(-MAX_LAUNCH_SPEED, Math.min(MAX_LAUNCH_SPEED, vy));
+    return { vx, vy };
+  }
+
+  function squash() {
+    ball.classList.remove('is-bouncing');
+    void ball.offsetWidth; // restart the animation
+    ball.classList.add('is-bouncing');
+  }
+
+  function dockAt(centerX, centerY) {
+    ball.classList.remove('is-freed', 'is-flying');
+    ball.style.position = 'absolute';
+    const heroRect = hero.getBoundingClientRect();
+    const size = ball.offsetWidth;
+    ball.style.left = `${centerX - heroRect.left - size / 2}px`;
+    ball.style.top = `${centerY - heroRect.top - size / 2}px`;
+    ball.style.right = 'auto';
+    ball.style.bottom = 'auto';
+    ball.classList.remove('is-dragging');
+  }
+
+  function settleFreeAt(x, y) {
+    ball.classList.remove('is-flying');
+    ball.classList.add('is-freed');
+    ball.style.position = 'fixed';
+    ball.style.left = `${x}px`;
+    ball.style.top = `${y}px`;
+    ball.style.right = 'auto';
+    ball.style.bottom = 'auto';
+    ball.classList.remove('is-dragging');
+  }
+
+  function runPhysics(x, y, vx, vy) {
+    if (physicsFrame) cancelAnimationFrame(physicsFrame);
+    const size = ball.offsetWidth;
+
+    function step() {
+      vy += GRAVITY;
+      vx *= AIR_DRAG;
+      x += vx;
+      y += vy;
+
+      const maxX = window.innerWidth - size;
+      const maxY = window.innerHeight - size;
+      let bounced = false;
+
+      if (x < 0) { x = 0; vx = -vx * RESTITUTION; bounced = true; }
+      if (x > maxX) { x = maxX; vx = -vx * RESTITUTION; bounced = true; }
+      if (y < 0) { y = 0; vy = -vy * RESTITUTION; bounced = true; }
+      if (y > maxY) {
+        y = maxY;
+        vy = -vy * RESTITUTION;
+        vx *= FLOOR_FRICTION;
+        bounced = true;
+      }
+
+      ball.style.left = `${x}px`;
+      ball.style.top = `${y}px`;
+      if (bounced && Math.abs(vy) > 1) squash();
+
+      const onFloor = y >= maxY - 0.5;
+      const resting = onFloor && Math.abs(vx) < REST_SPEED && Math.abs(vy) < REST_SPEED;
+
+      if (resting) {
+        physicsFrame = null;
+        const cx = x + size / 2;
+        const cy = y + size / 2;
+        if (isOverWave(cx, cy)) {
+          dockAt(cx, cy);
+        } else {
+          settleFreeAt(x, y);
+        }
+      } else {
+        physicsFrame = requestAnimationFrame(step);
+      }
+    }
+
+    physicsFrame = requestAnimationFrame(step);
+  }
+
+  function startDrag(clientX, clientY, pointerId) {
+    if (physicsFrame) { cancelAnimationFrame(physicsFrame); physicsFrame = null; }
+    dragging = true;
+    ball.classList.remove('is-freed', 'is-flying');
+    ball.classList.add('is-dragging');
+    const rect = ball.getBoundingClientRect();
+    offsetX = clientX - rect.left;
+    offsetY = clientY - rect.top;
+    ball.style.position = 'fixed';
+    ball.style.left = `${rect.left}px`;
+    ball.style.top = `${rect.top}px`;
+    ball.style.right = 'auto';
+    ball.style.bottom = 'auto';
+    moveSamples = [{ x: clientX, y: clientY, t: performance.now() }];
+    if (pointerId !== undefined) {
+      try { ball.setPointerCapture(pointerId); } catch (err) { /* ignore */ }
+    }
+  }
+
+  function endDrag(clientX, clientY) {
+    if (!dragging) return;
+    dragging = false;
+    ball.classList.remove('is-dragging');
+
+    if (isOverWave(clientX, clientY)) {
+      dockAt(clientX, clientY);
+      return;
+    }
+
+    const { vx, vy } = getLaunchVelocity();
+    const rect = ball.getBoundingClientRect();
+    ball.classList.add('is-flying');
+    runPhysics(rect.left, rect.top, vx, vy);
+  }
+
+  ball.addEventListener('pointerdown', (e) => {
+    startDrag(e.clientX, e.clientY, e.pointerId);
+  });
+
+  ball.addEventListener('pointermove', (e) => {
+    if (!dragging) return;
+    ball.style.left = `${e.clientX - offsetX}px`;
+    ball.style.top = `${e.clientY - offsetY}px`;
+    ball.style.right = 'auto';
+    ball.style.bottom = 'auto';
+    recordSample(e.clientX, e.clientY);
+  });
+
+  ball.addEventListener('pointerup', (e) => endDrag(e.clientX, e.clientY));
+  ball.addEventListener('pointercancel', (e) => endDrag(e.clientX, e.clientY));
+})();
+
 // ===== LIGHTBOX GALLERY =====
 (function () {
     const galleries = {
