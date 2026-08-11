@@ -51,6 +51,14 @@ sections.forEach(section => observer.observe(section));
   let moveSamples = [];
   let physicsFrame = null;
 
+  function moveToBody() {
+  if (ball.parentElement !== document.body) document.body.appendChild(ball);
+}
+
+function moveToHero() {
+  if (ball.parentElement !== hero) hero.appendChild(ball);
+}
+
   function isOverWave(x, y) {
     const rect = hero.getBoundingClientRect();
     const waveTop = rect.top + rect.height * 0.62;
@@ -83,6 +91,7 @@ sections.forEach(section => observer.observe(section));
   }
 
   function dockAt(centerX, centerY) {
+    moveToHero();
     ball.classList.remove('is-freed', 'is-flying');
     ball.style.position = 'absolute';
     const heroRect = hero.getBoundingClientRect();
@@ -161,6 +170,7 @@ sections.forEach(section => observer.observe(section));
     const rect = ball.getBoundingClientRect();
     offsetX = clientX - rect.left;
     offsetY = clientY - rect.top;
+    moveToBody();
     ball.style.position = 'fixed';
     ball.style.left = `${rect.left}px`;
     ball.style.top = `${rect.top}px`;
