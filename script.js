@@ -313,6 +313,31 @@ sections.forEach(section => observer.observe(section));
         if (lastFocusedTrigger) lastFocusedTrigger.focus();
     }
 
+    // ===== Focus trap: keeps Tab cycling inside the lightbox while it's open =====
+    function getFocusable() {
+        return Array.from(
+            lightbox.querySelectorAll(
+                'button, [href], [tabindex]:not([tabindex="-1"])'
+            )
+        ).filter(el => el.offsetParent !== null);
+    }
+
+    function trapFocus(e) {
+        if (e.key !== "Tab") return;
+        const focusable = getFocusable();
+        if (!focusable.length) return;
+        const first = focusable[0];
+        const last = focusable[focusable.length - 1];
+
+        if (e.shiftKey && document.activeElement === first) {
+            e.preventDefault();
+            last.focus();
+        } else if (!e.shiftKey && document.activeElement === last) {
+            e.preventDefault();
+            first.focus();
+        }
+    }
+
     document.querySelectorAll("[data-gallery]").forEach((trigger) => {
         trigger.addEventListener("click", () => openGallery(trigger.dataset.gallery, trigger));
     });
@@ -329,5 +354,6 @@ sections.forEach(section => observer.observe(section));
         if (e.key === "Escape") closeGallery();
         if (e.key === "ArrowLeft") showImage(currentIndex - 1);
         if (e.key === "ArrowRight") showImage(currentIndex + 1);
+        trapFocus(e);
     });
 })();
