@@ -10,8 +10,8 @@ This repository contains my personal developer portfolio, built as a prelim proj
 - **About Me** — introduction, profile photo, and links to my GitHub, LinkedIn, Facebook, Instagram, and X
 - **Skills & Currently Learning** — languages and tools I use, plus what I'm currently picking up
 - **Achievements & Experience** — leadership roles, honors, and work experience, each with a photo gallery
-- **Academic Work** — Fashion Blog, Wine Festival Schedule, and Davies Burger course activities
-- **Projects** — capstone systems (SAKTO, PAPER, SLOPE, OUTAGE), research projects, and personal Java applications
+- **Academic Work** — Fashion Blog, Wine Festival Schedule, Davies Burger, Markdown-to-HTML Converter, and Real-Time Telemetry (Auth Gate) course activities
+- **Projects** — software projects (Em-Ployger, Skye Crafts, Kita Kita, Income Category Ledger, and Java desktop apps) with live demo and code links, plus capstone systems (SAKTO, PAPER, SLOPE, OUTAGE) and research projects
 
 ## Features
 - Custom lightbox photo gallery for each achievement, with keyboard navigation (arrow keys, Esc), dot indicators, and focus management

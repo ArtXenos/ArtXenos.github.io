@@ -496,6 +496,8 @@ a { color: inherit; text-decoration: none; }
 
 .postcard:nth-child(2) { transform: rotate(1deg); }
 .postcard:nth-child(3) { transform: rotate(-0.5deg); }
+.postcard:nth-child(4) { transform: rotate(1.5deg); }
+.postcard:nth-child(5) { transform: rotate(-1deg); }
 
 .postcard:hover,
 .postcard:focus-visible {
@@ -553,6 +555,39 @@ a { color: inherit; text-decoration: none; }
 .island-link {
   font-weight: 700;
   color: var(--coral);
+}
+
+.island-subhead {
+  margin-top: 2.5rem;
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--blue);
+}
+
+.island-subhead + .island-grid { margin-top: 1rem; }
+
+.island-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.2rem;
+}
+
+.island-card--featured {
+  grid-column: 1 / -1;
+  border-bottom-color: var(--coral);
+}
+
+.island-badge {
+  display: inline-block;
+  margin-bottom: 0.6rem;
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  border: 2px dashed var(--coral);
+  color: var(--coral);
+  padding: 0.2rem 0.5rem;
+  border-radius: 4px;
 }
 
 /* ===================================================
