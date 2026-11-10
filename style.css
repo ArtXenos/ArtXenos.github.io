@@ -11,6 +11,10 @@
   --coral: #E8927C;
   --white: #FFFDF9;
 
+  /* Darker text versions of the accents — pass WCAG AA (4.5:1) on white, sand-light and sand */
+  --coral-text: #9E4733;
+  --blue-text: #3D6380;
+
   --font-display: "Fraunces", serif;
   --font-body: "Nunito", sans-serif;
   --font-mono: "Space Mono", monospace;
@@ -54,7 +58,7 @@ a { color: inherit; text-decoration: none; }
   font-size: 0.8rem;
   letter-spacing: 0.08em;
   text-transform: uppercase;
-  color: var(--coral);
+  color: var(--coral-text);
   margin-bottom: 0.6em;
 }
 
@@ -64,7 +68,7 @@ a { color: inherit; text-decoration: none; }
   padding: 5rem 1.5rem;
 }
 
-.highlight { color: var(--coral); font-style: italic; }
+.highlight { color: var(--coral-text); font-style: italic; }
 
 /* ===================================================
    NAV — the "lifebuoy"
@@ -89,7 +93,7 @@ a { color: inherit; text-decoration: none; }
 .nav-logo {
   font-family: var(--font-display);
   font-weight: 700;
-  color: var(--coral);
+  color: var(--coral-text);
   font-size: 1.1rem;
 }
 
@@ -113,8 +117,8 @@ a { color: inherit; text-decoration: none; }
 
 .nav-links a:hover,
 .nav-links a:focus-visible {
-  color: var(--coral);
-  border-color: var(--coral);
+  color: var(--coral-text);
+  border-color: var(--coral-text);
 }
 
 .nav-toggle {
@@ -228,15 +232,14 @@ a { color: inherit; text-decoration: none; }
 
 .hero-title {
   font-size: clamp(2rem, 7vw, 4rem);
-  color: var(--white);
-  text-shadow: 0 4px 24px rgba(61, 51, 82, 0.25);
+  color: var(--plum);
+  text-shadow: 0 2px 18px rgba(255, 253, 249, 0.45);
 }
 
 .hero-subtitle {
-  color: var(--white);
+  color: var(--plum);
   font-weight: 600;
   font-size: 1.1rem;
-  opacity: 0.9;
   margin-bottom: 1rem;
 }
 
@@ -247,7 +250,7 @@ a { color: inherit; text-decoration: none; }
   color: var(--plum);
 }
 
-.hero .eyebrow { color: var(--white); }
+.hero .eyebrow { color: var(--plum); }
 
 .scroll-cue {
   display: inline-flex;
@@ -255,14 +258,14 @@ a { color: inherit; text-decoration: none; }
   justify-content: center;
   width: 34px;
   height: 54px;
-  border: 2px solid var(--white);
+  border: 2px solid var(--plum);
   border-radius: 999px;
 }
 
 .scroll-cue-dot {
   width: 6px;
   height: 6px;
-  background: var(--white);
+  background: var(--plum);
   border-radius: 50%;
   animation: bob 1.8s ease-in-out infinite;
 }
@@ -408,7 +411,7 @@ a { color: inherit; text-decoration: none; }
 }
 
 .skills-group h3 {
-  color: var(--coral);
+  color: var(--coral-text);
   margin-bottom: 1rem;
 }
 
@@ -428,8 +431,8 @@ a { color: inherit; text-decoration: none; }
 
 .tag-cloud--learning span {
   background: transparent;
-  border: 2px dashed var(--blue);
-  color: var(--blue);
+  border: 2px dashed var(--blue-text);
+  color: var(--blue-text);
 }
 
 /* ===================================================
@@ -466,7 +469,7 @@ a { color: inherit; text-decoration: none; }
   font-family: var(--font-mono);
   font-size: 0.7rem;
   font-weight: 400;
-  color: var(--blue);
+  color: var(--blue-text);
   text-transform: uppercase;
   letter-spacing: 0.03em;
 }
@@ -510,8 +513,8 @@ a { color: inherit; text-decoration: none; }
   right: 1rem;
   font-family: var(--font-mono);
   font-size: 0.7rem;
-  border: 2px dashed var(--coral);
-  color: var(--coral);
+  border: 2px dashed var(--coral-text);
+  color: var(--coral-text);
   padding: 0.2rem 0.5rem;
   border-radius: 4px;
 }
@@ -554,7 +557,7 @@ a { color: inherit; text-decoration: none; }
 
 .island-link {
   font-weight: 700;
-  color: var(--coral);
+  color: var(--coral-text);
 }
 
 .island-subhead {
@@ -563,7 +566,7 @@ a { color: inherit; text-decoration: none; }
   font-size: 0.85rem;
   letter-spacing: 0.08em;
   text-transform: uppercase;
-  color: var(--blue);
+  color: var(--blue-text);
 }
 
 .island-subhead + .island-grid { margin-top: 1rem; }
@@ -584,8 +587,8 @@ a { color: inherit; text-decoration: none; }
   margin-bottom: 0.6rem;
   font-family: var(--font-mono);
   font-size: 0.7rem;
-  border: 2px dashed var(--coral);
-  color: var(--coral);
+  border: 2px dashed var(--coral-text);
+  color: var(--coral-text);
   padding: 0.2rem 0.5rem;
   border-radius: 4px;
 }
@@ -596,7 +599,7 @@ a { color: inherit; text-decoration: none; }
 .shoreline {
   position: relative;
   z-index: 0;
-  background: var(--blue);
+  background: var(--blue-text);
   color: var(--white);
   padding-top: 4rem;
   text-align: center;
@@ -742,7 +745,7 @@ a { color: inherit; text-decoration: none; }
   height: 36px;
   border-radius: 50%;
   border: 3px solid var(--sand);
-  background: var(--coral);
+  background: var(--plum);
   color: var(--white);
   font-size: 1.3rem;
   line-height: 1;
@@ -752,7 +755,7 @@ a { color: inherit; text-decoration: none; }
 
 .lightbox-close:hover,
 .lightbox-close:focus-visible {
-  background: var(--plum);
+  background: var(--coral-text);
 }
 
 .lightbox-arrow {
@@ -773,7 +776,7 @@ a { color: inherit; text-decoration: none; }
 
 .lightbox-arrow:hover,
 .lightbox-arrow:focus-visible {
-  background: var(--coral);
+  background: var(--coral-text);
   color: var(--white);
 }
 
@@ -802,15 +805,15 @@ a { color: inherit; text-decoration: none; }
   width: 9px;
   height: 9px;
   border-radius: 50%;
-  border: 2px dashed var(--blue);
+  border: 2px dashed var(--blue-text);
   background: transparent;
   padding: 0;
   cursor: pointer;
 }
 
 .lightbox-dots button.is-active {
-  background: var(--coral);
-  border-color: var(--coral);
+  background: var(--coral-text);
+  border-color: var(--coral-text);
 }
 
 @media (max-width: 560px) {

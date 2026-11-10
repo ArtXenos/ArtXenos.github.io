@@ -24,7 +24,7 @@ const observer = new IntersectionObserver((entries) => {
     if (entry.isIntersecting) {
       const id = entry.target.getAttribute('id');
       navAnchors.forEach(a => {
-        a.style.color = a.getAttribute('href') === `#${id}` ? 'var(--coral)' : '';
+        a.style.color = a.getAttribute('href') === `#${id}` ? 'var(--coral-text)' : '';
       });
     }
   });
