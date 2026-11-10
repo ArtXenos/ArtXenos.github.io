@@ -432,9 +432,45 @@ main:focus { outline: none; }
 
 .skills-columns {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  grid-template-columns: 1fr;
   gap: 1.8rem;
   margin-top: 2rem;
+  align-items: start;
+}
+
+@media (min-width: 900px) {
+  .skills-columns { grid-template-columns: 2fr 1fr; }
+}
+
+/* Labeled rows inside the Skills & Tools card */
+.skill-rows { margin: 0; }
+
+.skill-row {
+  display: grid;
+  grid-template-columns: 7.5rem 1fr;
+  gap: 0.4rem 1rem;
+  align-items: start;
+  padding: 0.9rem 0;
+  border-top: 1px dashed var(--sand);
+}
+
+.skill-row:first-child { border-top: none; padding-top: 0; }
+
+.skill-row dt {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--blue-text);
+  padding-top: 0.45rem;
+}
+
+.skill-row dd { margin: 0; }
+
+@media (max-width: 560px) {
+  .skill-row { grid-template-columns: 1fr; }
+  .skill-row dt { padding-top: 0; }
 }
 
 .skills-group {
@@ -609,7 +645,8 @@ main:focus { outline: none; }
   color: var(--blue-text);
 }
 
-.island-subhead + .island-grid { margin-top: 1rem; }
+.island-subhead + .island-grid,
+.island-subhead + .chest-grid { margin-top: 1rem; }
 
 .island-links {
   display: flex;
