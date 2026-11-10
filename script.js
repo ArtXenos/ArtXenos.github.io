@@ -2,6 +2,11 @@
 const navToggle = document.getElementById('navToggle');
 const navLinks = document.getElementById('navLinks');
 
+function closeMenu() {
+  navLinks.classList.remove('open');
+  navToggle.setAttribute('aria-expanded', 'false');
+}
+
 navToggle.addEventListener('click', () => {
   const isOpen = navLinks.classList.toggle('open');
   navToggle.setAttribute('aria-expanded', isOpen);
@@ -9,10 +14,15 @@ navToggle.addEventListener('click', () => {
 
 // Close the mobile menu after a link is tapped
 navLinks.querySelectorAll('a').forEach(link => {
-  link.addEventListener('click', () => {
-    navLinks.classList.remove('open');
-    navToggle.setAttribute('aria-expanded', 'false');
-  });
+  link.addEventListener('click', closeMenu);
+});
+
+// Close the mobile menu with Escape and return focus to the toggle
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape' && navLinks.classList.contains('open')) {
+    closeMenu();
+    navToggle.focus();
+  }
 });
 
 // ===== Highlight the current section in the nav while scrolling =====
@@ -51,13 +61,17 @@ sections.forEach(section => observer.observe(section));
   let moveSamples = [];
   let physicsFrame = null;
 
-  function moveToBody() {
-  if (ball.parentElement !== document.body) document.body.appendChild(ball);
-}
+  // Moving a focused element in the DOM drops its focus, so restore it afterwards
+  function moveTo(parent) {
+    if (ball.parentElement === parent) return;
+    const hadFocus = document.activeElement === ball;
+    parent.appendChild(ball);
+    if (hadFocus) ball.focus({ preventScroll: true });
+  }
 
-function moveToHero() {
-  if (ball.parentElement !== hero) hero.appendChild(ball);
-}
+  function moveToBody() { moveTo(document.body); }
+
+  function moveToHero() { moveTo(hero); }
 
   function isOverWave(x, y) {
     const rect = hero.getBoundingClientRect();
@@ -213,6 +227,22 @@ function moveToHero() {
 
   ball.addEventListener('pointerup', (e) => endDrag(e.clientX, e.clientY));
   ball.addEventListener('pointercancel', (e) => endDrag(e.clientX, e.clientY));
+
+  // Keyboard: Enter or Space tosses the ball up from wherever it is
+  ball.addEventListener('keydown', (e) => {
+    if (e.key !== 'Enter' && e.key !== ' ') return;
+    e.preventDefault();
+    if (dragging) return;
+    const rect = ball.getBoundingClientRect();
+    moveToBody();
+    ball.classList.remove('is-freed', 'is-dragging');
+    ball.classList.add('is-flying');
+    ball.style.position = 'fixed';
+    ball.style.right = 'auto';
+    ball.style.bottom = 'auto';
+    const vx = (Math.random() * 2 - 1) * 8;
+    runPhysics(rect.left, rect.top, vx, -22);
+  });
 })();
 
 // ===== LIGHTBOX GALLERY =====
