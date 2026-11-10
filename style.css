@@ -235,10 +235,6 @@ main:focus { outline: none; }
   animation-direction: reverse;
 }
 
-.horizon--foot .horizon-track {
-  animation-duration: 18s;
-}
-
 @keyframes wave-flow {
   from { transform: translateX(0); }
   to { transform: translateX(-50%); }
@@ -603,7 +599,6 @@ main:focus { outline: none; }
 
 .island-card {
   background: var(--white);
-  border-radius: 50% / 12%;
   border-radius: var(--radius);
   padding: 2rem;
   box-shadow: 0 10px 30px rgba(61, 51, 82, 0.08);

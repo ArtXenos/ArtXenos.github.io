@@ -99,11 +99,6 @@ sections.forEach(section => observer.observe(section));
     return { vx, vy };
   }
 
-  function squash() {
-    ball.classList.remove('is-bouncing');
-    void ball.offsetWidth; // restart the animation
-    ball.classList.add('is-bouncing');
-  }
 
   function dockAt(centerX, centerY) {
     moveToHero();
@@ -141,21 +136,18 @@ sections.forEach(section => observer.observe(section));
 
       const maxX = window.innerWidth - size;
       const maxY = window.innerHeight - size;
-      let bounced = false;
 
-      if (x < 0) { x = 0; vx = -vx * RESTITUTION; bounced = true; }
-      if (x > maxX) { x = maxX; vx = -vx * RESTITUTION; bounced = true; }
-      if (y < 0) { y = 0; vy = -vy * RESTITUTION; bounced = true; }
+      if (x < 0) { x = 0; vx = -vx * RESTITUTION; }
+      if (x > maxX) { x = maxX; vx = -vx * RESTITUTION; }
+      if (y < 0) { y = 0; vy = -vy * RESTITUTION; }
       if (y > maxY) {
         y = maxY;
         vy = -vy * RESTITUTION;
         vx *= FLOOR_FRICTION;
-        bounced = true;
       }
 
       ball.style.left = `${x}px`;
       ball.style.top = `${y}px`;
-      if (bounced && Math.abs(vy) > 1) squash();
 
       const onFloor = y >= maxY - 0.5;
       const resting = onFloor && Math.abs(vx) < REST_SPEED && Math.abs(vy) < REST_SPEED;
