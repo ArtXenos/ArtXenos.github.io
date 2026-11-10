@@ -26,6 +26,8 @@
 
 <body>
 
+  <a href="#main" class="skip-link">Skip to content</a>
+
   <!-- ===== NAV ===== -->
   <nav class="lifebuoy-nav" aria-label="Main navigation">
     <a href="#hero" class="nav-logo">AXG</a>
@@ -69,7 +71,7 @@
     <div class="hero-content">
       <p class="eyebrow">Welcome to my shore!</p>
       <h1 class="hero-title">Art Xenos D. Guadalquiver</h1>
-      <h3 class="hero-subtitle">Computer Science Student • Full-Stack Web Developer</h3>
+      <p class="hero-subtitle">Computer Science Student • Full-Stack Web Developer</p>
       <p class="hero-tagline">Transforming ideas into impactful software through creativity, problem-solving, and
         continuous learning.</p>
       <a href="#about" class="scroll-cue" aria-label="Scroll to About section">
@@ -80,7 +82,7 @@
   </header>
 
 
-  <main>
+  <main id="main" tabindex="-1">
 
     <!-- ===== ABOUT ===== -->
     <section id="about" class="section section--hut">
@@ -111,21 +113,21 @@
             <!-- End of intro paragraphs -->
             <div class="shell-links">
               <a href="https://github.com/ArtXenos" class="shell-link" target="_blank" rel="noopener">
-                <span class="shell-icon">🐚</span> GitHub
+                <span class="shell-icon" aria-hidden="true">🐚</span> GitHub
               </a>
               <a href="https://www.linkedin.com/in/art-xenos-d-guadalquiver-84004a3ab/" class="shell-link"
                 target="_blank" rel="noopener">
-                <span class="shell-icon">🐚</span> LinkedIn
+                <span class="shell-icon" aria-hidden="true">🐚</span> LinkedIn
               </a>
               <a href="https://www.facebook.com/xenos.dano.guadalquiver" class="shell-link" target="_blank"
                 rel="noopener">
-                <span class="shell-icon">🐚</span> Facebook
+                <span class="shell-icon" aria-hidden="true">🐚</span> Facebook
               </a>
               <a href="https://www.instagram.com/xeno_cidex/" class="shell-link" target="_blank" rel="noopener">
-                <span class="shell-icon">🐚</span> Instagram
+                <span class="shell-icon" aria-hidden="true">🐚</span> Instagram
               </a>
               <a href="https://www.x.com/xenocide_x" class="shell-link" target="_blank" rel="noopener">
-                <span class="shell-icon">🐚</span> X (Twitter)
+                <span class="shell-icon" aria-hidden="true">🐚</span> X (Twitter)
               </a>
             </div>
           </div>
@@ -219,51 +221,51 @@
         <h2>Treasure collected along the way</h2>
         <div class="chest-grid">
           <article class="chest-card">
-            <span class="chest-icon">⛪</span>
+            <span class="chest-icon" aria-hidden="true">⛪</span>
             <h3>Vice President, UFY</h3>
             <p>United Foursquare Youth, Tiblawan Foursquare Gospel Church — led youth programs and served on the leadership team.</p>
-            <button type="button" class="island-link chest-gallery-trigger" data-gallery="ufy"><u>View</u><span class="sr-only"> photos: Vice President, UFY</span></button>
+            <button type="button" class="island-link chest-gallery-trigger" data-gallery="ufy">View<span class="sr-only"> photos: Vice President, UFY</span></button>
           </article>
           <article class="chest-card">
-            <span class="chest-icon">🎓</span>
+            <span class="chest-icon" aria-hidden="true">🎓</span>
             <h3>With Honors</h3>
             <span class="chest-subtitle">(Conduct Awardee)</span>
             <p>Graduated Senior High School with Honors for academic performance and recognized for exemplary conduct and character.</p>
-            <button type="button" class="island-link chest-gallery-trigger" data-gallery="honors"><u>View</u><span class="sr-only"> photos: With Honors</span></button>
+            <button type="button" class="island-link chest-gallery-trigger" data-gallery="honors">View<span class="sr-only"> photos: With Honors</span></button>
           </article>
           <article class="chest-card">
-            <span class="chest-icon">💵</span>
+            <span class="chest-icon" aria-hidden="true">💵</span>
             <h3>Cashier Experience <span class="chest-subtitle">(Hardware Store)</span></h3>
             <p>Managed daily cash transactions, customer service, and financial accuracy in a fast-paced environment at Tiblawan Hardware.</p>
-            <button type="button" class="island-link chest-gallery-trigger" data-gallery="cashier"><u>View</u><span class="sr-only"> photos: Cashier Experience</span></button>
+            <button type="button" class="island-link chest-gallery-trigger" data-gallery="cashier">View<span class="sr-only"> photos: Cashier Experience</span></button>
           </article>
           <article class="chest-card">
-            <span class="chest-icon">🔨</span>
+            <span class="chest-icon" aria-hidden="true">🔨</span>
             <h3>Craftsman</h3>
             <span class="chest-subtitle">(Carpentry)</span>
             <p>Hands-on craftsmanship experience — built and crafted wooden objects.</p>
-            <button type="button" class="island-link chest-gallery-trigger" data-gallery="craftsman"><u>View</u><span class="sr-only"> photos: Craftsman</span></button>
+            <button type="button" class="island-link chest-gallery-trigger" data-gallery="craftsman">View<span class="sr-only"> photos: Craftsman</span></button>
           </article>
           <article class="chest-card">
-            <span class="chest-icon">🌊</span>
+            <span class="chest-icon" aria-hidden="true">🌊</span>
             <h3>Beach Manager</h3>
             <p>Managed beach operations — oversees daily operations, safety rules, and cleanliness at Breezy Leaves
               Tiblawan Beach Resort.</p>
-            <button type="button" class="island-link chest-gallery-trigger" data-gallery="beach-manager"><u>View</u><span class="sr-only"> photos: Beach Manager</span></button>
+            <button type="button" class="island-link chest-gallery-trigger" data-gallery="beach-manager">View<span class="sr-only"> photos: Beach Manager</span></button>
           </article>
                     <article class="chest-card">
-            <span class="chest-icon">🤖</span>
+            <span class="chest-icon" aria-hidden="true">🤖</span>
             <h3>Generative AI for Everyone</h3>
             <span class="chest-subtitle">(DeepLearning.AI)</span>
             <p>Learned what generative AI is and how it works, how to think through the lifecycle of a generative AI project from conception to launch — including building effective prompts — and the opportunities and risks generative AI presents to individuals, businesses, and society.</p>
-            <a href="https://www.coursera.org/account/accomplishments/verify/NTBEFP8PDLRX" target="_blank" rel="noopener" class="island-link"><u>View Certificate</u><span class="sr-only"> for Generative AI for Everyone on Coursera</span></a>
+            <a href="https://www.coursera.org/account/accomplishments/verify/NTBEFP8PDLRX" target="_blank" rel="noopener" class="island-link">View Certificate<span class="sr-only"> for Generative AI for Everyone on Coursera</span></a>
           </article>
           <article class="chest-card">
-            <span class="chest-icon">☁️</span>
+            <span class="chest-icon" aria-hidden="true">☁️</span>
             <h3>Introduction to Generative AI</h3>
             <span class="chest-subtitle">(Google Cloud)</span>
             <p>Learned to define generative AI, explain how it works, describe generative AI model types, and describe real-world generative AI applications.</p>
-            <a href="https://www.coursera.org/account/accomplishments/verify/W6LW0JFIJX62" target="_blank" rel="noopener" class="island-link"><u>View Certificate</u><span class="sr-only"> for Introduction to Generative AI on Coursera</span></a>
+            <a href="https://www.coursera.org/account/accomplishments/verify/W6LW0JFIJX62" target="_blank" rel="noopener" class="island-link">View Certificate<span class="sr-only"> for Introduction to Generative AI on Coursera</span></a>
           </article>
         </div>
       </div>
@@ -284,8 +286,7 @@
           <a href="https://artxenos.github.io/Activity%201.2/index.html" class="postcard" target="_blank"
             rel="noopener">
             <span class="postcard-stamp">HTML 1.2</span>
-            <h3>Wine Festival</h3>
-            <h3>Schedule</h3>
+            <h3>Wine Festival<br>Schedule</h3>
             <p>View the activity →</p>
           </a>
           <a href="https://artxenos.github.io/Activity%202.1/Davies-Burger/index.html" class="postcard" target="_blank"
@@ -296,15 +297,13 @@
           </a>
           <a href="https://artxenos.github.io/Markdown-to-HTML/" class="postcard" target="_blank" rel="noopener">
             <span class="postcard-stamp">JS</span>
-            <h3>Markdown-to-HTML</h3>
-            <h3>Converter</h3>
+            <h3>Markdown-to-HTML<br>Converter</h3>
             <p>View the activity →</p>
           </a>
           <a href="https://github.com/ArtXenos/Real-Time-Telemetry-Auth-Gate-" class="postcard" target="_blank"
             rel="noopener">
             <span class="postcard-stamp">JS DOM</span>
-            <h3>Real-Time Telemetry</h3>
-            <h3>(Auth Gate)</h3>
+            <h3>Real-Time Telemetry<br>(Auth Gate)</h3>
             <p>View the code →</p>
           </a>
         </div>
@@ -332,7 +331,7 @@
               <span>MariaDB</span><span>JUnit 5</span><span>Mockito</span>
             </div>
             <div class="island-links">
-              <a href="https://github.com/ArtXenos/Employger" target="_blank" rel="noopener" class="island-link"><u>Code</u><span class="sr-only"> for Em-Ployger on GitHub</span></a>
+              <a href="https://github.com/ArtXenos/Employger" target="_blank" rel="noopener" class="island-link">Code<span class="sr-only"> for Em-Ployger on GitHub</span></a>
             </div>
           </article>
           <article class="island-card">
@@ -345,8 +344,8 @@
               <span>Tailwind CSS</span><span>Zod</span><span>Vitest</span><span>Playwright</span>
             </div>
             <div class="island-links">
-              <a href="https://skye-crafts-v2.vercel.app/" target="_blank" rel="noopener" class="island-link"><u>Live</u><span class="sr-only"> site: Skye Crafts</span></a>
-              <a href="https://github.com/ArtXenos/Skye-Crafts-V2" target="_blank" rel="noopener" class="island-link"><u>Code</u><span class="sr-only"> for Skye Crafts on GitHub</span></a>
+              <a href="https://skye-crafts-v2.vercel.app/" target="_blank" rel="noopener" class="island-link">Live<span class="sr-only"> site: Skye Crafts</span></a>
+              <a href="https://github.com/ArtXenos/Skye-Crafts-V2" target="_blank" rel="noopener" class="island-link">Code<span class="sr-only"> for Skye Crafts on GitHub</span></a>
             </div>
           </article>
           <article class="island-card">
@@ -358,8 +357,8 @@
               <span>React</span><span>Vite</span><span>React Router</span><span>Team Project</span>
             </div>
             <div class="island-links">
-              <a href="https://kita-kita-a8lv.vercel.app/" target="_blank" rel="noopener" class="island-link"><u>Live</u><span class="sr-only"> site: Kita Kita</span></a>
-              <a href="https://github.com/UIC-CCS-WEB-DEVELOPMENT-2026-2027/KitaKita" target="_blank" rel="noopener" class="island-link"><u>Code</u><span class="sr-only"> for Kita Kita on GitHub</span></a>
+              <a href="https://kita-kita-a8lv.vercel.app/" target="_blank" rel="noopener" class="island-link">Live<span class="sr-only"> site: Kita Kita</span></a>
+              <a href="https://github.com/UIC-CCS-WEB-DEVELOPMENT-2026-2027/KitaKita" target="_blank" rel="noopener" class="island-link">Code<span class="sr-only"> for Kita Kita on GitHub</span></a>
             </div>
           </article>
           <article class="island-card">
@@ -370,8 +369,8 @@
               <span>React</span><span>Vite</span><span>Bootstrap</span><span>Vercel</span>
             </div>
             <div class="island-links">
-              <a href="https://income-ledger-react.vercel.app/" target="_blank" rel="noopener" class="island-link"><u>Live</u><span class="sr-only"> site: Income Category Ledger</span></a>
-              <a href="https://github.com/ArtXenos/finals-tla-2" target="_blank" rel="noopener" class="island-link"><u>Code</u><span class="sr-only"> for Income Category Ledger on GitHub</span></a>
+              <a href="https://income-ledger-react.vercel.app/" target="_blank" rel="noopener" class="island-link">Live<span class="sr-only"> site: Income Category Ledger</span></a>
+              <a href="https://github.com/ArtXenos/finals-tla-2" target="_blank" rel="noopener" class="island-link">Code<span class="sr-only"> for Income Category Ledger on GitHub</span></a>
             </div>
           </article>
           <article class="island-card">
@@ -380,14 +379,14 @@
               items through Java-based interface, real-time record management, and JSON data storage.</p>
             <div class="skill-tags"><span>Java Swing</span><span>JSON</span></div>
             <a href="Portfolio/Lost and Found Management System.pdf" target="_blank" rel="noopener"
-              class="island-link"><u>View PDF</u><span class="sr-only"> of Lost and Found Management System,</span> <span class="file-size">(1.1 MB)</span></a>
+              class="island-link">View PDF<span class="sr-only"> of Lost and Found Management System,</span> <span class="file-size">(1.1 MB)</span></a>
           </article>
           <article class="island-card">
             <h3>Movie Ticket Booking System</h3>
             <p>A Java desktop application that streamlines movie ticket reservations by allowing users to browse
               showtimes, select seats, and manage their bookings through an intuitive interface.</p>
             <div class="skill-tags"><span>Java</span></div>
-            <a href="Portfolio/Movie Ticketing System (1).pdf" target="_blank" rel="noopener" class="island-link"><u>View PDF</u><span class="sr-only"> of Movie Ticket Booking System,</span> <span class="file-size">(368 KB)</span></a>
+            <a href="Portfolio/Movie Ticketing System (1).pdf" target="_blank" rel="noopener" class="island-link">View PDF<span class="sr-only"> of Movie Ticket Booking System,</span> <span class="file-size">(368 KB)</span></a>
           </article>
         </div>
 
@@ -400,14 +399,14 @@
               The system combines solar panels, rechargeable batteries, and a water/ice reservoir to run an eco-friendly
               evaporative micro air pump.</p>
             <div class="skill-tags"><span>Capstone</span></div>
-            <a href="Portfolio/OUTAGE.pdf" target="_blank" rel="noopener" class="island-link"><u>View PDF</u><span class="sr-only"> of OUTAGE capstone,</span> <span class="file-size">(3.2 MB)</span></a>
+            <a href="Portfolio/OUTAGE.pdf" target="_blank" rel="noopener" class="island-link">View PDF<span class="sr-only"> of OUTAGE capstone,</span> <span class="file-size">(3.2 MB)</span></a>
           </article>
           <article class="island-card">
             <h3>SAKTO — Sustainable Advancement in Keeping Trash Orderly</h3>
             <p>The SAKTO project automates waste segregation by detecting and sorting waste into wet, dry, or metal
               categories, providing a more efficient and hygienic alternative to manual sorting.</p>
             <div class="skill-tags"><span>Capstone</span></div>
-            <a href="Portfolio/SAKTO.pdf" target="_blank" rel="noopener" class="island-link"><u>View PDF</u><span class="sr-only"> of SAKTO capstone,</span> <span class="file-size">(1.8 MB)</span></a>
+            <a href="Portfolio/SAKTO.pdf" target="_blank" rel="noopener" class="island-link">View PDF<span class="sr-only"> of SAKTO capstone,</span> <span class="file-size">(1.8 MB)</span></a>
           </article>
           <article class="island-card">
             <h3>PAPER — Protective and Aqua-resistant Paper for Eco-Friendly Reinforcement</h3>
@@ -415,7 +414,7 @@
               water-resistant paper using recycled materials and a biodegradable taro leaf coating, reducing water
               damage and plastic waste.</p>
             <div class="skill-tags"><span>Capstone</span></div>
-            <a href="Portfolio/PAPER.pdf" target="_blank" rel="noopener" class="island-link"><u>View PDF</u><span class="sr-only"> of PAPER capstone,</span> <span class="file-size">(972 KB)</span></a>
+            <a href="Portfolio/PAPER.pdf" target="_blank" rel="noopener" class="island-link">View PDF<span class="sr-only"> of PAPER capstone,</span> <span class="file-size">(972 KB)</span></a>
           </article>
           <article class="island-card">
             <h3>SLOPE — Smart Landslide Observation and Prediction Equipment</h3>
@@ -423,7 +422,7 @@
               stabilizing soil and using sensors to monitor conditions and send real-time alerts to local authorities.
             </p>
             <div class="skill-tags"><span>Capstone</span></div>
-            <a href="Portfolio/SLOPE-Capstone.pdf" target="_blank" rel="noopener" class="island-link"><u>View PDF</u><span class="sr-only"> of SLOPE capstone,</span> <span class="file-size">(2.2 MB)</span></a>
+            <a href="Portfolio/SLOPE-Capstone.pdf" target="_blank" rel="noopener" class="island-link">View PDF<span class="sr-only"> of SLOPE capstone,</span> <span class="file-size">(2.2 MB)</span></a>
           </article>
           <article class="island-card">
             <h3>Digital Literacy and Student-Faculty Interaction: A Quantitative Study Among Senior High School
@@ -431,7 +430,7 @@
             <p>Students with higher digital literacy tend to have better interaction and communication with their
               teachers.</p>
             <div class="skill-tags"><span>Research</span></div>
-            <a href="Portfolio/Digital Literacy.pdf" target="_blank" rel="noopener" class="island-link"><u>View PDF</u><span class="sr-only"> of Digital Literacy research paper,</span> <span class="file-size">(6.1 MB)</span></a>
+            <a href="Portfolio/Digital Literacy.pdf" target="_blank" rel="noopener" class="island-link">View PDF<span class="sr-only"> of Digital Literacy research paper,</span> <span class="file-size">(6.1 MB)</span></a>
           </article>
           <article class="island-card">
             <h3>Technological Acceptability of a Predictive Chemical Toxicity Software For a science-related program in
@@ -439,7 +438,7 @@
             <p>The study assesses students' acceptance of predictive chemical toxicity software and examines whether
               technological acceptability varies by demographic factors.</p>
             <div class="skill-tags"><span>Research Proposal</span></div>
-            <a href="Portfolio/Technological Acceptability.pdf" target="_blank" rel="noopener" class="island-link"><u>View PDF</u><span class="sr-only"> of Technological Acceptability research proposal,</span> <span class="file-size">(4.5 MB)</span></a>
+            <a href="Portfolio/Technological Acceptability.pdf" target="_blank" rel="noopener" class="island-link">View PDF<span class="sr-only"> of Technological Acceptability research proposal,</span> <span class="file-size">(4.5 MB)</span></a>
           </article>
         </div>
       </div>
@@ -472,17 +471,18 @@
   <!-- ===== LIGHTBOX ===== -->
   <div class="lightbox" id="lightbox" aria-hidden="true">
     <div class="lightbox-backdrop" data-lightbox-close></div>
-    <div class="lightbox-frame" role="dialog" aria-modal="true" aria-labelledby="lightboxCaption">
+    <div class="lightbox-frame" role="dialog" aria-modal="true" aria-labelledby="lightboxTitle">
       <button type="button" class="lightbox-close" data-lightbox-close aria-label="Close gallery">&times;</button>
       <button type="button" class="lightbox-arrow lightbox-arrow--prev" id="lightboxPrev"
         aria-label="Previous photo">&#8592;</button>
-      <div class="lightbox-stage">
+      <h2 class="lightbox-title" id="lightboxTitle"></h2>
+      <div class="lightbox-stage" id="lightboxStage">
         <img src="" alt="" id="lightboxImage" class="lightbox-image">
       </div>
       <button type="button" class="lightbox-arrow lightbox-arrow--next" id="lightboxNext"
         aria-label="Next photo">&#8594;</button>
       <div class="lightbox-meta">
-        <p class="lightbox-caption" id="lightboxCaption"></p>
+        <p class="lightbox-caption" id="lightboxCaption" aria-live="polite"></p>
         <div class="lightbox-dots" id="lightboxDots"></div>
       </div>
     </div>

@@ -34,7 +34,8 @@ const observer = new IntersectionObserver((entries) => {
     if (entry.isIntersecting) {
       const id = entry.target.getAttribute('id');
       navAnchors.forEach(a => {
-        a.style.color = a.getAttribute('href') === `#${id}` ? 'var(--coral-text)' : '';
+        if (a.getAttribute('href') === `#${id}`) a.setAttribute('aria-current', 'true');
+        else a.removeAttribute('aria-current');
       });
     }
   });
@@ -306,6 +307,12 @@ sections.forEach(section => observer.observe(section));
     const dotsEl = document.getElementById("lightboxDots");
     const prevBtn = document.getElementById("lightboxPrev");
     const nextBtn = document.getElementById("lightboxNext");
+    const titleEl = document.getElementById("lightboxTitle");
+    const stageEl = document.getElementById("lightboxStage");
+
+    // Hide the loading spinner once the photo has arrived (or failed)
+    imageEl.addEventListener("load", () => stageEl.classList.remove("is-loading"));
+    imageEl.addEventListener("error", () => stageEl.classList.remove("is-loading"));
 
     let currentGallery = null;
     let currentIndex = 0;
@@ -323,11 +330,22 @@ sections.forEach(section => observer.observe(section));
         });
     }
 
+    function preload(index) {
+        const n = currentGallery.images.length;
+        new Image().src = currentGallery.images[(index + n) % n].src;
+    }
+
     function showImage(index) {
-        currentIndex = (index + currentGallery.images.length) % currentGallery.images.length;
+        const total = currentGallery.images.length;
+        currentIndex = (index + total) % total;
         const item = currentGallery.images[currentIndex];
-        imageEl.src = item.src;
-        imageEl.alt = item.caption || currentGallery.title;
+        if (imageEl.getAttribute("src") !== item.src) {
+            stageEl.classList.add("is-loading");
+            imageEl.src = item.src;
+        }
+        imageEl.alt = item.caption || `${currentGallery.title} — photo ${currentIndex + 1} of ${total}`;
+        preload(currentIndex + 1);
+        preload(currentIndex - 1);
         captionEl.textContent = item.caption
             ? `${item.caption} — ${currentIndex + 1} / ${currentGallery.images.length}`
             : `${currentIndex + 1} / ${currentGallery.images.length}`;
@@ -339,6 +357,7 @@ sections.forEach(section => observer.observe(section));
         if (!gallery) return;
         currentGallery = gallery;
         lastFocusedTrigger = triggerEl;
+        titleEl.textContent = gallery.title;
         showImage(0);
         lightbox.classList.add("is-open");
         lightbox.setAttribute("aria-hidden", "false");

@@ -53,6 +53,24 @@ p { margin: 0 0 1em; }
 
 a { color: inherit; text-decoration: none; }
 
+/* Skip link: hidden until a keyboard user tabs to it */
+.skip-link {
+  position: absolute;
+  top: -100px;
+  left: 1rem;
+  z-index: 300;
+  padding: 0.75rem 1.2rem;
+  border-radius: 999px;
+  background: var(--plum);
+  color: var(--white);
+  font-family: var(--font-mono);
+  font-weight: 700;
+}
+
+.skip-link:focus { top: 1rem; }
+
+main:focus { outline: none; }
+
 .eyebrow {
   font-family: var(--font-mono);
   font-size: 0.8rem;
@@ -110,13 +128,15 @@ a { color: inherit; text-decoration: none; }
   font-size: 0.82rem;
   text-transform: uppercase;
   letter-spacing: 0.04em;
+  white-space: nowrap;
   padding: 0.3rem 0.1rem;
   border-bottom: 2px solid transparent;
   transition: border-color 0.2s ease, color 0.2s ease;
 }
 
 .nav-links a:hover,
-.nav-links a:focus-visible {
+.nav-links a:focus-visible,
+.nav-links a[aria-current] {
   color: var(--coral-text);
   border-color: var(--coral-text);
 }
@@ -149,6 +169,7 @@ a { color: inherit; text-decoration: none; }
   position: relative;
   z-index: 0;
   min-height: 100vh;
+  min-height: 100svh; /* fits the visible screen on mobile browsers with a collapsing address bar */
   display: flex;
   align-items: center;
   justify-content: center;
@@ -164,7 +185,6 @@ a { color: inherit; text-decoration: none; }
     var(--lavender) 55%,
     var(--blue) 100%
   );
-  background-attachment: fixed;
   z-index: -3;
 }
 
@@ -241,6 +261,8 @@ a { color: inherit; text-decoration: none; }
 }
 
 .hero-subtitle {
+  font-family: var(--font-display);
+  line-height: 1.3;
   color: var(--plum);
   font-weight: 600;
   font-size: 1.1rem;
@@ -393,6 +415,14 @@ a { color: inherit; text-decoration: none; }
   transform: translateY(-3px) rotate(-2deg);
 }
 
+/* Clear keyboard focus rings on the pastel cards */
+.shell-link:focus-visible,
+.island-link:focus-visible,
+.postcard:focus-visible {
+  outline: 3px solid var(--plum);
+  outline-offset: 3px;
+}
+
 /* ===================================================
    SKILLS — dive bag
 =================================================== */
@@ -471,7 +501,7 @@ a { color: inherit; text-decoration: none; }
 
 .chest-subtitle {
   font-family: var(--font-mono);
-  font-size: 0.7rem;
+  font-size: 0.75rem;
   font-weight: 400;
   color: var(--blue-text);
   text-transform: uppercase;
@@ -516,7 +546,7 @@ a { color: inherit; text-decoration: none; }
   top: 1rem;
   right: 1rem;
   font-family: var(--font-mono);
-  font-size: 0.7rem;
+  font-size: 0.75rem;
   border: 2px dashed var(--coral-text);
   color: var(--coral-text);
   padding: 0.2rem 0.5rem;
@@ -564,7 +594,11 @@ a { color: inherit; text-decoration: none; }
   padding: 0.5rem 0; /* taller tap area without changing the look */
   font-weight: 700;
   color: var(--coral-text);
+  text-decoration: underline;
+  text-underline-offset: 3px;
 }
+
+.island-link .file-size { text-decoration: none; display: inline-block; }
 
 .island-subhead {
   margin-top: 2.5rem;
@@ -592,7 +626,7 @@ a { color: inherit; text-decoration: none; }
   display: inline-block;
   margin-bottom: 0.6rem;
   font-family: var(--font-mono);
-  font-size: 0.7rem;
+  font-size: 0.75rem;
   border: 2px dashed var(--coral-text);
   color: var(--coral-text);
   padding: 0.2rem 0.5rem;
@@ -763,7 +797,7 @@ a { color: inherit; text-decoration: none; }
 
 .chest-gallery-trigger:hover,
 .chest-gallery-trigger:focus-visible {
-  text-decoration: underline;
+  text-decoration-thickness: 2px;
 }
 
 /* ===================================================
@@ -822,7 +856,34 @@ a { color: inherit; text-decoration: none; }
   max-height: 70vh;
 }
 
+.lightbox-title {
+  font-size: 1.1rem;
+  margin: 0.2rem 2.5rem 0.8rem 0.2rem;
+}
+
+/* Loading state: fade the old photo and show a spinner until the new one arrives */
+.lightbox-stage { position: relative; min-height: 200px; }
+
+.lightbox-stage.is-loading .lightbox-image { opacity: 0; }
+
+.lightbox-stage.is-loading::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 36px;
+  height: 36px;
+  margin: -18px 0 0 -18px;
+  border-radius: 50%;
+  border: 4px solid var(--white);
+  border-top-color: var(--coral-text);
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin { to { transform: rotate(360deg); } }
+
 .lightbox-image {
+  transition: opacity 0.2s ease;
   width: auto;
   height: auto;
   max-width: 100%;
