@@ -221,51 +221,51 @@ function moveToHero() {
         ufy: {
             title: "Vice President — United Foursquare Youth",
             images: [
-                { src: "Portfolio/UFY1.png"},
-                { src: "Portfolio/UFY2.jpg"},
-                { src: "Portfolio/UFY3.jpg"},
-                { src: "Portfolio/UFY4.png"},
-                { src: "Portfolio/UFY5.jpg"}
+                { src: "Portfolio/UFY1.webp"},
+                { src: "Portfolio/UFY2.webp"},
+                { src: "Portfolio/UFY3.webp"},
+                { src: "Portfolio/UFY4.webp"},
+                { src: "Portfolio/UFY5.webp"}
             ]
         },
         honors: {
             title: "With Honors — Conduct Awardee",
             images: [
-                { src: "Portfolio/Graduate1.jpg" },
-                { src: "Portfolio/Graduate2.png" },
-                { src: "Portfolio/Graduate3.png" },
-                { src: "Portfolio/Graduate4.png" },
-                { src: "Portfolio/Graduate5.jpg" }
+                { src: "Portfolio/Graduate1.webp" },
+                { src: "Portfolio/Graduate2.webp" },
+                { src: "Portfolio/Graduate3.webp" },
+                { src: "Portfolio/Graduate4.webp" },
+                { src: "Portfolio/Graduate5.webp" }
             ]
         },
         cashier: {
             title: "Cashier Experience — Tiblawan Hardware",
             images: [
-                { src: "Portfolio/Cashier1.jpg"},
-                { src: "Portfolio/Cashier2.jpeg"},
-                { src: "Portfolio/Cashier3.png"},
-                { src: "Portfolio/Cashier4.jpeg"},
-                { src: "Portfolio/Cashier5.jpeg"}
+                { src: "Portfolio/Cashier1.webp"},
+                { src: "Portfolio/Cashier2.webp"},
+                { src: "Portfolio/Cashier3.webp"},
+                { src: "Portfolio/Cashier4.webp"},
+                { src: "Portfolio/Cashier5.webp"}
             ]
         },
       craftsman: {
             title: "Craftsman — Carpentry",
             images: [
-                { src: "Portfolio/Craftsman1.jpg" },
-                { src: "Portfolio/Craftsman2.jpg" },
-                { src: "Portfolio/Craftsman3.jpg" },
-                { src: "Portfolio/Craftsman4.jpg" },
-                { src: "Portfolio/Craftsman5.jpg" }
+                { src: "Portfolio/Craftsman1.webp" },
+                { src: "Portfolio/Craftsman2.webp" },
+                { src: "Portfolio/Craftsman3.webp" },
+                { src: "Portfolio/Craftsman4.webp" },
+                { src: "Portfolio/Craftsman5.webp" }
             ]
         },
         "beach-manager": {
             title: "Beach Manager — Breezy Leaves Tiblawan",
             images: [
-                { src: "Portfolio/Beach1.jpg" },
-                { src: "Portfolio/Beach2.jpg" },
-                { src: "Portfolio/Beach3.jpg" },
-                { src: "Portfolio/Beach4.jpg" },
-                { src: "Portfolio/Beach5.png" }
+                { src: "Portfolio/Beach1.webp" },
+                { src: "Portfolio/Beach2.webp" },
+                { src: "Portfolio/Beach3.webp" },
+                { src: "Portfolio/Beach4.webp" },
+                { src: "Portfolio/Beach5.webp" }
             ]
         }
     };
