@@ -521,6 +521,28 @@ main:focus { outline: none; }
   border-radius: 999px;
 }
 
+/* Skills that link to projects (script.js swaps the span for a button) */
+.tag-cloud .tag-button {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  line-height: inherit;
+  color: inherit;
+  background: var(--sand);
+  padding: 0.4rem 0.85rem;
+  border: none;
+  border-radius: 999px;
+  box-shadow: inset 0 0 0 2px var(--coral);
+  cursor: pointer;
+  transition: background 0.2s ease, color 0.2s ease, transform 0.2s ease;
+}
+
+.tag-cloud .tag-button:hover,
+.tag-cloud .tag-button:focus-visible {
+  background: var(--coral);
+  color: #3D3352;
+  transform: translateY(-2px);
+}
+
 .tag-cloud--learning span {
   background: transparent;
   border: 2px dashed var(--blue-text);
@@ -1204,6 +1226,12 @@ body { transition: background-color 0.4s ease, color 0.4s ease; }
   border-color: var(--plum);
   color: var(--white);
   font-weight: 700;
+}
+
+.filter-chip--skill[aria-pressed="true"] {
+  border-color: var(--coral);
+  background: var(--coral);
+  color: #3D3352;
 }
 
 .filter-status {

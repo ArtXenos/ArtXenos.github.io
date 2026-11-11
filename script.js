@@ -501,21 +501,33 @@ sections.forEach(section => observer.observe(section));
   });
 })();
 
-// ===== Project filters =====
+// ===== Project filters (by category, or by a skill clicked in the Skills section) =====
 (function () {
   const bar = document.getElementById('projectFilters');
   const status = document.getElementById('filterStatus');
-  if (!bar || !status) return;
+  const section = document.getElementById('projects');
+  if (!bar || !status || !section) return;
 
   const chips = bar.querySelectorAll('.filter-chip');
-  const cards = document.querySelectorAll('#projects .island-card');
-  const grids = document.querySelectorAll('#projects .island-grid');
+  const cards = section.querySelectorAll('.island-card');
+  const grids = section.querySelectorAll('.island-grid');
 
-  function applyFilter(filter) {
+  function skillsOf(card) {
+    return Array.from(card.querySelectorAll(':scope > .skill-tags span'), span => span.textContent.trim());
+  }
+
+  // A temporary chip that shows the active skill and clears it when pressed
+  const skillChip = document.createElement('button');
+  skillChip.type = 'button';
+  skillChip.className = 'filter-chip filter-chip--skill';
+  skillChip.setAttribute('aria-pressed', 'true');
+  skillChip.hidden = true;
+  bar.appendChild(skillChip);
+
+  function show(matches, activeFilter, skill) {
     let shown = 0;
     cards.forEach(card => {
-      const categories = (card.dataset.category || '').split(' ');
-      const match = filter === 'all' || categories.includes(filter);
+      const match = matches(card);
       card.hidden = !match;
       if (match) shown++;
     });
@@ -528,14 +540,62 @@ sections.forEach(section => observer.observe(section));
       if (heading && heading.classList.contains('island-subhead')) heading.hidden = !hasVisible;
     });
 
-    chips.forEach(chip => chip.setAttribute('aria-pressed', String(chip.dataset.filter === filter)));
-    status.textContent = filter === 'all'
-      ? `Showing all ${cards.length} projects`
-      : `Showing ${shown} of ${cards.length} projects`;
+    chips.forEach(chip => chip.setAttribute('aria-pressed', String(chip.dataset.filter === activeFilter)));
+
+    skillChip.hidden = !skill;
+    if (skill) {
+      skillChip.textContent = `${skill} \u00D7`;
+      skillChip.setAttribute('aria-label', `Showing projects that use ${skill}. Clear this filter`);
+      status.textContent = `Showing ${shown} of ${cards.length} projects that use ${skill}`;
+    } else {
+      status.textContent = activeFilter === 'all'
+        ? `Showing all ${cards.length} projects`
+        : `Showing ${shown} of ${cards.length} projects`;
+    }
+  }
+
+  function applyFilter(filter) {
+    show(card => filter === 'all' || (card.dataset.category || '').split(' ').includes(filter), filter, null);
+  }
+
+  function applySkill(skill) {
+    show(card => skillsOf(card).includes(skill), null, skill);
   }
 
   chips.forEach(chip => chip.addEventListener('click', () => applyFilter(chip.dataset.filter)));
+  skillChip.addEventListener('click', () => {
+    applyFilter('all');
+    bar.querySelector('[data-filter="all"]').focus();
+  });
   bar.hidden = false;
+
+  // Skills that appear on at least one project become buttons that jump to those projects
+  const counts = {};
+  cards.forEach(card => skillsOf(card).forEach(skill => { counts[skill] = (counts[skill] || 0) + 1; }));
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  document.querySelectorAll('#skills .skill-rows .tag-cloud span').forEach(span => {
+    const skill = span.textContent.trim();
+    const count = counts[skill];
+    if (!count) return;
+
+    const button = document.createElement('button');
+    button.type = 'button';
+    button.className = 'tag-button';
+    button.textContent = skill;
+    button.title = count === 1 ? 'Show the project that uses this' : `Show the ${count} projects that use this`;
+    const context = document.createElement('span');
+    context.className = 'sr-only';
+    context.textContent = count === 1 ? ', show 1 project' : `, show ${count} projects`;
+    button.appendChild(context);
+
+    button.addEventListener('click', () => {
+      applySkill(skill);
+      section.scrollIntoView({ behavior: reduceMotion ? 'auto' : 'smooth' });
+      skillChip.focus({ preventScroll: true });
+    });
+    span.replaceWith(button);
+  });
 })();
 
 // ===== Copy email to clipboard =====

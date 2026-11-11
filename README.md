@@ -22,6 +22,7 @@ This repository contains my personal developer portfolio, built as a prelim proj
 - Screenshots on the software project cards (lazy-loaded WebP)
 - Project detail view — a "Details" button on each software project opens a dialog with a larger screenshot, highlights, the stack and links
 - Project filters (All, Web apps, Java, Research & Capstone) with a live count
+- Clickable skills — a skill that appears on a project jumps to Projects and shows only the projects that use it
 - Hero buttons that jump straight to Projects and Contact, a scroll progress bar, and a back-to-top button
 - Cards fade in as they scroll into view
 - "Copy email" button with a confirmation message
