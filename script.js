@@ -408,3 +408,154 @@ sections.forEach(section => observer.observe(section));
         trapFocus(e);
     });
 })();
+// ===== Theme toggle: sunset (light) and night (dark) =====
+(function () {
+  const toggle = document.getElementById('themeToggle');
+  if (!toggle) return;
+  const root = document.documentElement;
+  const themeColor = document.querySelector('meta[name="theme-color"]');
+  const darkQuery = window.matchMedia('(prefers-color-scheme: dark)');
+
+  function storedTheme() {
+    try { return localStorage.getItem('theme'); } catch (err) { return null; }
+  }
+
+  function applyTheme(theme) {
+    root.setAttribute('data-theme', theme);
+    const isNight = theme === 'night';
+    toggle.setAttribute('aria-label', isNight ? 'Switch to sunset theme' : 'Switch to night theme');
+    if (themeColor) themeColor.setAttribute('content', isNight ? '#151233' : '#F7B9A6');
+  }
+
+  applyTheme(root.getAttribute('data-theme') === 'night' ? 'night' : 'sunset');
+  toggle.hidden = false;
+
+  toggle.addEventListener('click', () => {
+    const next = root.getAttribute('data-theme') === 'night' ? 'sunset' : 'night';
+    applyTheme(next);
+    try { localStorage.setItem('theme', next); } catch (err) { /* storage blocked: theme still applies for this visit */ }
+  });
+
+  // Follow the device setting until the visitor picks a theme themselves
+  darkQuery.addEventListener('change', (e) => {
+    if (!storedTheme()) applyTheme(e.matches ? 'night' : 'sunset');
+  });
+})();
+
+// ===== Scroll progress bar and back-to-top button =====
+(function () {
+  const bar = document.getElementById('tideProgress');
+  const toTop = document.getElementById('toTop');
+  if (!bar || !toTop) return;
+  let ticking = false;
+
+  function update() {
+    ticking = false;
+    const scrollable = document.documentElement.scrollHeight - window.innerHeight;
+    const progress = scrollable > 0 ? Math.min(window.scrollY / scrollable, 1) : 0;
+    bar.style.transform = `scaleX(${progress})`;
+    toTop.classList.toggle('is-visible', window.scrollY > window.innerHeight * 0.8);
+  }
+
+  function requestUpdate() {
+    if (ticking) return;
+    ticking = true;
+    requestAnimationFrame(update);
+  }
+
+  window.addEventListener('scroll', requestUpdate, { passive: true });
+  window.addEventListener('resize', requestUpdate);
+  update();
+})();
+
+// ===== Reveal cards as they scroll into view =====
+(function () {
+  if (!('IntersectionObserver' in window)) return;
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+  const targets = document.querySelectorAll(
+    '.hut-card, .skills-group, .chest-card, .postcard, .island-card'
+  );
+
+  const revealObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (!entry.isIntersecting) return;
+      const el = entry.target;
+      revealObserver.unobserve(el);
+      el.classList.add('is-visible');
+      // Drop the helper classes afterwards so the stagger delay doesn't slow down hover effects
+      const delay = parseFloat(el.style.transitionDelay) || 0;
+      setTimeout(() => {
+        el.classList.remove('reveal', 'is-visible');
+        el.style.transitionDelay = '';
+      }, delay + 800);
+    });
+  }, { rootMargin: '0px 0px -8% 0px' });
+
+  targets.forEach(el => {
+    // Stagger cards that sit side by side in the same grid
+    const index = Array.prototype.indexOf.call(el.parentElement.children, el);
+    el.style.transitionDelay = `${Math.min(index, 4) * 70}ms`;
+    el.classList.add('reveal');
+    revealObserver.observe(el);
+  });
+})();
+
+// ===== Project filters =====
+(function () {
+  const bar = document.getElementById('projectFilters');
+  const status = document.getElementById('filterStatus');
+  if (!bar || !status) return;
+
+  const chips = bar.querySelectorAll('.filter-chip');
+  const cards = document.querySelectorAll('#projects .island-card');
+  const grids = document.querySelectorAll('#projects .island-grid');
+
+  function applyFilter(filter) {
+    let shown = 0;
+    cards.forEach(card => {
+      const categories = (card.dataset.category || '').split(' ');
+      const match = filter === 'all' || categories.includes(filter);
+      card.hidden = !match;
+      if (match) shown++;
+    });
+
+    // Hide a group's heading when none of its projects match
+    grids.forEach(grid => {
+      const hasVisible = grid.querySelector('.island-card:not([hidden])') !== null;
+      grid.hidden = !hasVisible;
+      const heading = grid.previousElementSibling;
+      if (heading && heading.classList.contains('island-subhead')) heading.hidden = !hasVisible;
+    });
+
+    chips.forEach(chip => chip.setAttribute('aria-pressed', String(chip.dataset.filter === filter)));
+    status.textContent = filter === 'all'
+      ? `Showing all ${cards.length} projects`
+      : `Showing ${shown} of ${cards.length} projects`;
+  }
+
+  chips.forEach(chip => chip.addEventListener('click', () => applyFilter(chip.dataset.filter)));
+  bar.hidden = false;
+})();
+
+// ===== Copy email to clipboard =====
+(function () {
+  const button = document.getElementById('copyEmail');
+  const toast = document.getElementById('toast');
+  if (!button || !toast || !navigator.clipboard) return;
+  let hideTimer = null;
+
+  function showToast(message) {
+    toast.textContent = message;
+    toast.classList.add('is-visible');
+    clearTimeout(hideTimer);
+    hideTimer = setTimeout(() => toast.classList.remove('is-visible'), 2600);
+  }
+
+  button.hidden = false;
+  button.addEventListener('click', () => {
+    navigator.clipboard.writeText(button.dataset.email)
+      .then(() => showToast('Email address copied'))
+      .catch(() => showToast('Could not copy — select the address below instead'));
+  });
+})();

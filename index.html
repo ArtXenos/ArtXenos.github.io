@@ -16,6 +16,18 @@
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
   <meta name="twitter:card" content="summary_large_image">
+  <meta name="theme-color" content="#F7B9A6">
+  <!-- Set the theme before the page paints so there is no flash of the wrong one -->
+  <script>
+    (function () {
+      var theme;
+      try { theme = localStorage.getItem('theme'); } catch (e) { /* storage blocked */ }
+      if (theme !== 'night' && theme !== 'sunset') {
+        theme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'night' : 'sunset';
+      }
+      document.documentElement.setAttribute('data-theme', theme);
+    })();
+  </script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link
@@ -43,7 +55,19 @@
       <li><a href="#projects">Projects</a></li>
       <li><a href="#contact">Contact</a></li>
     </ul>
+    <button type="button" class="theme-toggle" id="themeToggle" aria-label="Switch to night theme" hidden>
+      <svg class="theme-icon theme-icon--moon" viewBox="0 0 24 24" width="20" height="20" aria-hidden="true">
+        <path d="M20 14.5A8.5 8.5 0 0 1 9.5 4a8.5 8.5 0 1 0 10.5 10.5z" fill="currentColor"></path>
+      </svg>
+      <svg class="theme-icon theme-icon--sun" viewBox="0 0 24 24" width="20" height="20" aria-hidden="true">
+        <circle cx="12" cy="12" r="4.5" fill="currentColor"></circle>
+        <path d="M12 2v3M12 19v3M2 12h3M19 12h3M4.9 4.9l2.1 2.1M17 17l2.1 2.1M4.9 19.1L7 17M17 7l2.1-2.1"
+          stroke="currentColor" stroke-width="2" stroke-linecap="round" fill="none"></path>
+      </svg>
+    </button>
   </nav>
+
+  <div class="tide-progress" id="tideProgress" aria-hidden="true"></div>
 
   <!-- ===== HERO ===== -->
   <header id="hero" class="hero">
@@ -75,6 +99,10 @@
       <p class="hero-subtitle">Computer Science Student • Full-Stack Web Developer</p>
       <p class="hero-tagline">Transforming ideas into impactful software through creativity, problem-solving, and
         continuous learning.</p>
+      <div class="hero-actions">
+        <a href="#projects" class="hero-btn hero-btn--primary">See my projects</a>
+        <a href="#contact" class="hero-btn">Get in touch</a>
+      </div>
       <a href="#about" class="scroll-cue" aria-label="Scroll to About section">
         <span class="scroll-cue-dot"></span>
       </a>
@@ -295,9 +323,17 @@
         <p class="eyebrow">05 — Projects</p>
         <h2>Islands worth visiting</h2>
 
+        <div class="filter-bar" id="projectFilters" role="group" aria-label="Filter projects" hidden>
+          <button type="button" class="filter-chip" data-filter="all" aria-pressed="true">All</button>
+          <button type="button" class="filter-chip" data-filter="web" aria-pressed="false">Web apps</button>
+          <button type="button" class="filter-chip" data-filter="java" aria-pressed="false">Java</button>
+          <button type="button" class="filter-chip" data-filter="research" aria-pressed="false">Research &amp; Capstone</button>
+        </div>
+        <p class="filter-status" id="filterStatus" role="status"></p>
+
         <h3 class="island-subhead">Software Projects</h3>
         <div class="island-grid">
-          <article class="island-card island-card--featured">
+          <article class="island-card island-card--featured" data-category="java web">
             <span class="island-badge">Featured</span>
             <h3>Em-Ployger — Payroll Management System</h3>
             <p>A payroll system for Philippine employers covering employees, attendance, overtime, leave, pay cycles and
@@ -313,7 +349,7 @@
               <a href="https://github.com/ArtXenos/Employger" target="_blank" rel="noopener" class="island-link">Code<span class="sr-only"> for Em-Ployger on GitHub</span></a>
             </div>
           </article>
-          <article class="island-card">
+          <article class="island-card" data-category="web">
             <h3>Skye Crafts — Online Shop</h3>
             <p>An online shop for handmade fuzzy-wire bouquets, keychains and figurines. Customers order for local
               delivery or pickup, pay by GCash or cash, and track their orders; the owner runs everything from an admin
@@ -327,7 +363,7 @@
               <a href="https://github.com/ArtXenos/Skye-Crafts-V2" target="_blank" rel="noopener" class="island-link">Code<span class="sr-only"> for Skye Crafts on GitHub</span></a>
             </div>
           </article>
-          <article class="island-card">
+          <article class="island-card" data-category="web">
             <h3>Kita Kita — Cash Register for Startups</h3>
             <p>A cash register web app for small businesses. Owners record sales and expenses, then get insights like
               net profit, profit margin, cash runway and break-even point, with plain-language tips based on their own
@@ -340,7 +376,7 @@
               <a href="https://github.com/UIC-CCS-WEB-DEVELOPMENT-2026-2027/KitaKita" target="_blank" rel="noopener" class="island-link">Code<span class="sr-only"> for Kita Kita on GitHub</span></a>
             </div>
           </article>
-          <article class="island-card">
+          <article class="island-card" data-category="web">
             <h3>Income Category Ledger</h3>
             <p>A refactor of a vanilla JavaScript DOM app into a modular React application, adding inline validation
               messages, keyboard shortcuts and a cleaner component structure.</p>
@@ -352,7 +388,7 @@
               <a href="https://github.com/ArtXenos/finals-tla-2" target="_blank" rel="noopener" class="island-link">Code<span class="sr-only"> for Income Category Ledger on GitHub</span></a>
             </div>
           </article>
-          <article class="island-card">
+          <article class="island-card" data-category="java">
             <h3>Lost and Found Management System</h3>
             <p>The Lost and Found Management System replaces paper logs with a digital registry that tracks misplaced
               items through Java-based interface, real-time record management, and JSON data storage.</p>
@@ -360,7 +396,7 @@
             <a href="Portfolio/Lost and Found Management System.pdf" target="_blank" rel="noopener"
               class="island-link">View PDF<span class="sr-only"> of Lost and Found Management System,</span> <span class="file-size">(1.1 MB)</span></a>
           </article>
-          <article class="island-card">
+          <article class="island-card" data-category="java">
             <h3>Movie Ticket Booking System</h3>
             <p>A Java desktop application that streamlines movie ticket reservations by allowing users to browse
               showtimes, select seats, and manage their bookings through an intuitive interface.</p>
@@ -371,7 +407,7 @@
 
         <h3 class="island-subhead">Research &amp; Capstone</h3>
         <div class="island-grid">
-          <article class="island-card">
+          <article class="island-card" data-category="research">
             <h3>Off-Grid Utility for Thermal Airflow and General Ease (OUTAGE): A Cooling Device for Blackout Scenarios
             </h3>
             <p>The OUTAGE provides portable, energy-efficient cooling during power outages in underserved communities.
@@ -380,14 +416,14 @@
             <div class="skill-tags"><span>Capstone</span></div>
             <a href="Portfolio/OUTAGE.pdf" target="_blank" rel="noopener" class="island-link">View PDF<span class="sr-only"> of OUTAGE capstone,</span> <span class="file-size">(3.2 MB)</span></a>
           </article>
-          <article class="island-card">
+          <article class="island-card" data-category="research">
             <h3>SAKTO — Sustainable Advancement in Keeping Trash Orderly</h3>
             <p>The SAKTO project automates waste segregation by detecting and sorting waste into wet, dry, or metal
               categories, providing a more efficient and hygienic alternative to manual sorting.</p>
             <div class="skill-tags"><span>Capstone</span></div>
             <a href="Portfolio/SAKTO.pdf" target="_blank" rel="noopener" class="island-link">View PDF<span class="sr-only"> of SAKTO capstone,</span> <span class="file-size">(1.8 MB)</span></a>
           </article>
-          <article class="island-card">
+          <article class="island-card" data-category="research">
             <h3>PAPER — Protective and Aqua-resistant Paper for Eco-Friendly Reinforcement</h3>
             <p>The PAPER project addresses the problem of conventional paper being damaged easily and creates durable,
               water-resistant paper using recycled materials and a biodegradable taro leaf coating, reducing water
@@ -395,7 +431,7 @@
             <div class="skill-tags"><span>Capstone</span></div>
             <a href="Portfolio/PAPER.pdf" target="_blank" rel="noopener" class="island-link">View PDF<span class="sr-only"> of PAPER capstone,</span> <span class="file-size">(972 KB)</span></a>
           </article>
-          <article class="island-card">
+          <article class="island-card" data-category="research">
             <h3>SLOPE — Smart Landslide Observation and Prediction Equipment</h3>
             <p>The Smart Landslide Observation and Prediction Engine (SLOPE) helps prevent landslide disasters by
               stabilizing soil and using sensors to monitor conditions and send real-time alerts to local authorities.
@@ -403,7 +439,7 @@
             <div class="skill-tags"><span>Capstone</span></div>
             <a href="Portfolio/SLOPE-Capstone.pdf" target="_blank" rel="noopener" class="island-link">View PDF<span class="sr-only"> of SLOPE capstone,</span> <span class="file-size">(2.2 MB)</span></a>
           </article>
-          <article class="island-card">
+          <article class="island-card" data-category="research">
             <h3>Digital Literacy and Student-Faculty Interaction: A Quantitative Study Among Senior High School
               Students.</h3>
             <p>Students with higher digital literacy tend to have better interaction and communication with their
@@ -411,7 +447,7 @@
             <div class="skill-tags"><span>Research</span></div>
             <a href="Portfolio/Digital Literacy.pdf" target="_blank" rel="noopener" class="island-link">View PDF<span class="sr-only"> of Digital Literacy research paper,</span> <span class="file-size">(6.1 MB)</span></a>
           </article>
-          <article class="island-card">
+          <article class="island-card" data-category="research">
             <h3>Technological Acceptability of a Predictive Chemical Toxicity Software For a science-related program in
               a Catholic school in Davao City.</h3>
             <p>The study assesses students' acceptance of predictive chemical toxicity software and examines whether
@@ -427,6 +463,9 @@
 
   <!-- ===== FOOTER / CONTACT ===== -->
   <footer id="contact" class="shoreline">
+    <svg class="shoreline-wave" viewBox="0 0 1440 100" preserveAspectRatio="none" aria-hidden="true">
+      <path d="M0,0 L1440,0 L1440,40 C1200,95 960,10 720,50 C480,90 240,15 0,60 Z"></path>
+    </svg>
     <div class="shoreline-content">
       <p class="eyebrow">06 — Contact</p>
       <h2>Let's connect</h2>
@@ -437,6 +476,8 @@
         <a href="mailto:guadalquiverartxenos@gmail.com" class="contact-btn contact-btn--primary">Email me</a>
         <a href="https://www.linkedin.com/in/art-xenos-d-guadalquiver-84004a3ab/" target="_blank" rel="noopener"
           class="contact-btn">LinkedIn</a>
+        <button type="button" class="contact-btn" id="copyEmail" data-email="guadalquiverartxenos@gmail.com"
+          hidden>Copy email</button>
       </div>
       <p class="contact-address">guadalquiverartxenos@gmail.com</p>
       <p class="repo-note">
@@ -446,6 +487,15 @@
       <p class="copyright">© 2026 Art Xenos D. Guadalquiver. Designed and developed with HTML, CSS, and JavaScript.</p>
     </div>
   </footer>
+
+  <a href="#hero" class="to-top" id="toTop" aria-label="Back to top">
+    <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true">
+      <path d="M12 19V5M5 12l7-7 7 7" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"
+        stroke-linejoin="round" fill="none"></path>
+    </svg>
+  </a>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
 
   <!-- ===== LIGHTBOX ===== -->
   <div class="lightbox" id="lightbox" aria-hidden="true">

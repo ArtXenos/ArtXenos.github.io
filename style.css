@@ -10,6 +10,8 @@
   --sand-light: #FBF3E1;
   --coral: #E8927C;
   --white: #FFFDF9;
+  --paper: #FFFDF9; /* stays light in both themes (beach ball, moon) */
+  color-scheme: light;
 
   /* Darker text versions of the accents — pass WCAG AA (4.5:1) on white, sand-light and sand */
   --coral-text: #9E4733;
@@ -101,6 +103,7 @@ main:focus { outline: none; }
   align-items: center;
   gap: 1.5rem;
   background: rgba(255, 253, 249, 0.85);
+  background: color-mix(in srgb, var(--white) 85%, transparent);
   backdrop-filter: blur(8px);
   border: 2px solid var(--white);
   border-radius: 999px;
@@ -268,7 +271,7 @@ main:focus { outline: none; }
 .hero-tagline {
   font-size: 1rem;
   max-width: 34ch;
-  margin: 0 auto 2.5rem;
+  margin: 0 auto 1.6rem;
   color: var(--plum);
 }
 
@@ -317,18 +320,18 @@ main:focus { outline: none; }
     conic-gradient(
       from 0deg,
       var(--coral) 0deg 60deg,
-      var(--white) 60deg 120deg,
+      var(--paper) 60deg 120deg,
       var(--blue) 120deg 180deg,
-      var(--white) 180deg 240deg,
+      var(--paper) 180deg 240deg,
       var(--peach) 240deg 300deg,
-      var(--white) 300deg 360deg
+      var(--paper) 300deg 360deg
     );
   box-shadow: 0 10px 20px rgba(61, 51, 82, 0.3);
   animation: ball-ride 6s ease-in-out infinite;
 }
 
 .beach-ball:focus-visible {
-  outline: 3px solid var(--white);
+  outline: 3px solid var(--plum);
   outline-offset: 3px;
 }
 
@@ -557,7 +560,7 @@ main:focus { outline: none; }
   display: block;
   background: var(--white);
   border-radius: 10px;
-  padding: 1.8rem;
+  padding: 3rem 1.8rem 1.8rem; /* top room so the stamp never overlaps the title */
   box-shadow: 0 10px 20px rgba(61, 51, 82, 0.1);
   transform: rotate(-1.5deg);
   transition: transform 0.25s ease;
@@ -603,6 +606,12 @@ main:focus { outline: none; }
   padding: 2rem;
   box-shadow: 0 10px 30px rgba(61, 51, 82, 0.08);
   border-bottom: 6px solid var(--blue);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.island-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 18px 36px rgba(61, 51, 82, 0.14);
 }
 
 .skill-tags {
@@ -708,7 +717,7 @@ main:focus { outline: none; }
   gap: 1rem;
 }
 
-.shoreline a.contact-btn {
+.shoreline .contact-btn {
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -716,27 +725,30 @@ main:focus { outline: none; }
   padding: 0.75rem 1.6rem;
   border-radius: 999px;
   border: 2px solid var(--white);
+  background: transparent;
   color: var(--white);
   font-family: var(--font-mono);
+  font-size: 1rem;
   font-weight: 700;
   text-decoration: none;
+  cursor: pointer;
   transition: transform 0.2s ease, background 0.2s ease, color 0.2s ease;
 }
 
-.shoreline a.contact-btn--primary {
+.shoreline .contact-btn--primary {
   background: var(--white);
   color: var(--blue-text);
 }
 
-.shoreline a.contact-btn:hover,
-.shoreline a.contact-btn:focus-visible {
+.shoreline .contact-btn:hover,
+.shoreline .contact-btn:focus-visible {
   transform: translateY(-3px);
   background: var(--sand);
   color: var(--plum);
   border-color: var(--sand);
 }
 
-.shoreline a.contact-btn:focus-visible {
+.shoreline .contact-btn:focus-visible {
   outline: 3px solid var(--white);
   outline-offset: 3px;
 }
@@ -775,8 +787,8 @@ main:focus { outline: none; }
 /* ===================================================
    RESPONSIVE
 =================================================== */
-@media (max-width: 720px) {
-  .nav-toggle { display: flex; }
+@media (max-width: 860px) {
+  .nav-toggle { display: flex; order: 3; }
 
   .nav-links {
     position: absolute;
@@ -1020,4 +1032,343 @@ main:focus { outline: none; }
   .lightbox-arrow--next { right: 4px; }
   .lightbox-frame { padding: 1rem; }
   .lightbox-close { top: -14px; right: -6px; }
+}
+
+/* ===================================================
+   SHARED HELPERS
+=================================================== */
+/* Lets the hidden attribute win over display: flex / grid */
+[hidden] { display: none !important; }
+
+body { transition: background-color 0.4s ease, color 0.4s ease; }
+
+/* ===================================================
+   THEME TOGGLE
+=================================================== */
+.theme-toggle {
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  margin: -0.3rem 0;
+  border: none;
+  border-radius: 50%;
+  background: transparent;
+  color: var(--plum);
+  cursor: pointer;
+  transition: background 0.2s ease, transform 0.3s ease;
+}
+
+.theme-toggle:hover,
+.theme-toggle:focus-visible {
+  background: var(--sand);
+  transform: rotate(18deg);
+}
+
+.theme-toggle:focus-visible,
+.filter-chip:focus-visible,
+.hero-btn:focus-visible,
+.to-top:focus-visible {
+  outline: 3px solid var(--plum);
+  outline-offset: 3px;
+}
+
+/* Show the icon of the theme you would switch to */
+.theme-icon--sun { display: none; }
+[data-theme="night"] .theme-icon--sun { display: block; }
+[data-theme="night"] .theme-icon--moon { display: none; }
+
+/* ===================================================
+   SCROLL PROGRESS — the tide line
+=================================================== */
+.tide-progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 150;
+  width: 100%;
+  height: 4px;
+  background: linear-gradient(to right, var(--coral), var(--lavender), var(--blue));
+  transform: scaleX(0);
+  transform-origin: left;
+  pointer-events: none;
+}
+
+/* ===================================================
+   HERO BUTTONS
+=================================================== */
+.hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.9rem;
+  margin-bottom: 2rem;
+}
+
+.hero-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 48px;
+  padding: 0.7rem 1.5rem;
+  border-radius: 999px;
+  border: 2px solid var(--plum);
+  background: rgba(255, 253, 249, 0.4);
+  background: color-mix(in srgb, var(--white) 40%, transparent);
+  color: var(--plum);
+  font-family: var(--font-mono);
+  font-size: 0.9rem;
+  font-weight: 700;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.hero-btn--primary {
+  background: var(--plum);
+  color: var(--white);
+}
+
+.hero-btn:hover,
+.hero-btn:focus-visible {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 22px rgba(61, 51, 82, 0.22);
+}
+
+/* ===================================================
+   PROJECT FILTERS
+=================================================== */
+.filter-bar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+  margin-top: 1.5rem;
+}
+
+.filter-chip {
+  min-height: 44px;
+  padding: 0.5rem 1.1rem;
+  border-radius: 999px;
+  border: 2px solid var(--sand);
+  background: var(--white);
+  color: var(--plum);
+  font-family: var(--font-mono);
+  font-size: 0.82rem;
+  cursor: pointer;
+  transition: background 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+}
+
+.filter-chip:hover { border-color: var(--coral-text); }
+
+.filter-chip[aria-pressed="true"] {
+  background: var(--plum);
+  border-color: var(--plum);
+  color: var(--white);
+  font-weight: 700;
+}
+
+.filter-status {
+  margin: 0.8rem 0 0;
+  min-height: 1.4em;
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  color: var(--blue-text);
+}
+
+/* ===================================================
+   SCROLL REVEAL (class is added by script.js, so no-JS visitors see everything)
+=================================================== */
+.reveal {
+  opacity: 0;
+  translate: 0 26px;
+  transition: opacity 0.6s ease, translate 0.6s ease, transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.reveal.is-visible {
+  opacity: 1;
+  translate: 0 0;
+}
+
+/* ===================================================
+   FOOTER WAVE, BACK TO TOP, TOAST
+=================================================== */
+.shoreline-wave {
+  position: absolute;
+  top: -1px;
+  left: 0;
+  width: 100%;
+  height: 4.5rem;
+  display: block;
+}
+
+.shoreline-wave path { fill: var(--sand-light); }
+
+.to-top {
+  position: fixed;
+  right: 1.2rem;
+  bottom: 1.2rem;
+  z-index: 90;
+  display: grid;
+  place-items: center;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  border: 2px solid var(--white);
+  background: var(--plum);
+  color: var(--white);
+  box-shadow: 0 8px 20px rgba(61, 51, 82, 0.3);
+  opacity: 0;
+  visibility: hidden;
+  translate: 0 12px;
+  transition: opacity 0.25s ease, translate 0.25s ease, visibility 0s linear 0.25s;
+}
+
+.to-top.is-visible {
+  opacity: 1;
+  visibility: visible;
+  translate: 0 0;
+  transition: opacity 0.25s ease, translate 0.25s ease, visibility 0s;
+}
+
+.to-top:hover { translate: 0 -3px; }
+
+.toast {
+  position: fixed;
+  left: 50%;
+  bottom: 1.6rem;
+  z-index: 250;
+  max-width: calc(100vw - 2rem);
+  padding: 0.7rem 1.3rem;
+  border-radius: 999px;
+  background: var(--plum);
+  color: var(--white);
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  box-shadow: 0 10px 26px rgba(61, 51, 82, 0.35);
+  opacity: 0;
+  visibility: hidden;
+  translate: -50% 12px;
+  transition: opacity 0.25s ease, translate 0.25s ease, visibility 0s linear 0.25s;
+}
+
+.toast.is-visible {
+  opacity: 1;
+  visibility: visible;
+  translate: -50% 0;
+  transition: opacity 0.25s ease, translate 0.25s ease, visibility 0s;
+}
+
+/* ===================================================
+   NIGHT THEME — moonlit shore
+   The palette tokens are remapped, so most components follow automatically.
+   Text colours below keep at least 4.5:1 contrast on the night surfaces.
+=================================================== */
+:root[data-theme="night"] {
+  color-scheme: dark;
+  --plum: #F3EBDD;        /* text */
+  --white: #2B2444;       /* cards */
+  --sand-light: #1F1A33;  /* page background */
+  --sand: #3A3157;        /* chips and tinted surfaces */
+  --coral-text: #F6AD98;
+  --blue-text: #A9CDEA;
+}
+
+/* Night sky fades in over the sunset, with stars on top */
+.sky-layer::before,
+.sky-layer::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  transition: opacity 0.6s ease;
+}
+
+.sky-layer::before {
+  background: linear-gradient(to bottom, #151233 0%, #33295F 55%, #485688 100%);
+}
+
+.sky-layer::after {
+  background-image:
+    radial-gradient(1.6px 1.6px at 8% 14%, #fff, transparent),
+    radial-gradient(1.2px 1.2px at 17% 32%, #fff, transparent),
+    radial-gradient(2px 2px at 26% 9%, #fff, transparent),
+    radial-gradient(1.2px 1.2px at 34% 24%, #fff, transparent),
+    radial-gradient(1.6px 1.6px at 43% 6%, #fff, transparent),
+    radial-gradient(1.2px 1.2px at 58% 12%, #fff, transparent),
+    radial-gradient(2px 2px at 66% 28%, #fff, transparent),
+    radial-gradient(1.2px 1.2px at 74% 8%, #fff, transparent),
+    radial-gradient(1.6px 1.6px at 83% 20%, #fff, transparent),
+    radial-gradient(1.2px 1.2px at 91% 36%, #fff, transparent),
+    radial-gradient(1.6px 1.6px at 95% 10%, #fff, transparent),
+    radial-gradient(1.2px 1.2px at 4% 42%, #fff, transparent),
+    radial-gradient(1.2px 1.2px at 50% 38%, #fff, transparent),
+    radial-gradient(1.6px 1.6px at 78% 44%, #fff, transparent);
+}
+
+[data-theme="night"] .sky-layer::before { opacity: 1; }
+
+[data-theme="night"] .sky-layer::after {
+  opacity: 1;
+  animation: twinkle 3.5s ease-in-out infinite alternate;
+}
+
+@keyframes twinkle {
+  from { opacity: 0.5; }
+  to { opacity: 1; }
+}
+
+/* The sun becomes the moon */
+[data-theme="night"] .sun {
+  background: radial-gradient(circle at 35% 35%, var(--paper), #CFC8EC 72%);
+  box-shadow: 0 0 70px 16px rgba(207, 200, 236, 0.35);
+  /* The moon is bright, so it sits beside the heading instead of behind it */
+  top: 15%;
+  left: 78%;
+  width: 110px;
+  height: 110px;
+}
+
+@media (max-width: 560px) {
+  [data-theme="night"] .sun {
+    top: 12%;
+    width: 80px;
+    height: 80px;
+  }
+}
+
+[data-theme="night"] .horizon--far path { fill: rgba(72, 98, 150, 0.6); }
+
+[data-theme="night"] .hero-title { text-shadow: 0 2px 18px rgba(21, 18, 51, 0.6); }
+
+/* Peach hover needs dark text once the default text turns light */
+[data-theme="night"] .shell-link:hover,
+[data-theme="night"] .shell-link:focus-visible { color: #3D3352; }
+
+[data-theme="night"] .shoreline {
+  background: #15112A;
+  color: var(--plum);
+}
+
+[data-theme="night"] .shoreline .eyebrow { color: var(--coral-text); }
+
+[data-theme="night"] .shoreline .contact-btn {
+  border-color: var(--plum);
+  color: var(--plum);
+}
+
+[data-theme="night"] .shoreline .contact-btn--primary {
+  background: var(--plum);
+  color: #1F1A33;
+}
+
+[data-theme="night"] .shoreline .contact-btn:hover,
+[data-theme="night"] .shoreline .contact-btn:focus-visible {
+  background: var(--sand);
+  border-color: var(--plum);
+  color: var(--plum);
+}
+
+[data-theme="night"] .shoreline .contact-btn:focus-visible { outline-color: var(--plum); }
+
+@media (max-width: 560px) {
+  .filter-chip { flex: 1 1 auto; }
+  .to-top { right: 0.8rem; bottom: 0.8rem; }
 }
