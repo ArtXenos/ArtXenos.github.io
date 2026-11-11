@@ -30,6 +30,7 @@ This repository contains my personal developer portfolio, built as a prelim proj
 - Small motion details — skill chips bob like buoys on hover, and the hero tagline types itself out once
 - Live GitHub strip under Projects — public repo count, latest push and most-used languages from the GitHub API, with plain text if the request fails
 - "Copy email" button with a confirmation message
+- Custom "Lost at sea" 404 page in the same style, with links back home
 - Sunset-and-wave favicon (SVG, with ICO and Apple touch icon fallbacks)
 - Respects `prefers-reduced-motion` for visitors who prefer minimal animation
 
