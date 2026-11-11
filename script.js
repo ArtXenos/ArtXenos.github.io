@@ -686,3 +686,100 @@ sections.forEach(section => observer.observe(section));
   dialog.addEventListener('click', (e) => { if (e.target === dialog) dialog.close(); });
   dialog.addEventListener('close', () => { document.body.style.overflow = ''; });
 })();
+
+// ===== Live GitHub numbers (the static text stays if the request fails) =====
+(function () {
+  const strip = document.getElementById('githubStats');
+  const list = document.getElementById('githubStatsList');
+  const note = document.getElementById('githubStatsNote');
+  if (!strip || !list || !note || !window.fetch) return;
+
+  const user = strip.dataset.user;
+  const CACHE_KEY = 'githubRepos';
+  const CACHE_MINUTES = 30;
+
+  function readCache() {
+    try {
+      const cached = JSON.parse(sessionStorage.getItem(CACHE_KEY));
+      if (cached && Date.now() - cached.savedAt < CACHE_MINUTES * 60000) return cached.repos;
+    } catch (err) { /* storage blocked or empty */ }
+    return null;
+  }
+
+  function writeCache(repos) {
+    try {
+      sessionStorage.setItem(CACHE_KEY, JSON.stringify({ savedAt: Date.now(), repos }));
+    } catch (err) { /* storage blocked: just fetch again next time */ }
+  }
+
+  function timeAgo(dateString) {
+    const days = Math.round((Date.now() - new Date(dateString).getTime()) / 86400000);
+    if (days <= 0) return 'today';
+    if (days === 1) return 'yesterday';
+    if (days < 30) return `${days} days ago`;
+    const months = Math.round(days / 30);
+    if (months < 12) return months === 1 ? 'a month ago' : `${months} months ago`;
+    const years = Math.round(days / 365);
+    return years === 1 ? 'a year ago' : `${years} years ago`;
+  }
+
+  function addStat(label, ...content) {
+    const row = document.createElement('div');
+    const dt = document.createElement('dt');
+    dt.textContent = label;
+    const dd = document.createElement('dd');
+    dd.append(...content);
+    row.append(dt, dd);
+    list.appendChild(row);
+  }
+
+  function render(repos) {
+    const own = repos.filter(repo => !repo.fork);
+    if (!own.length) return;
+
+    addStat('Public repositories', String(repos.length));
+
+    const latest = own[0]; // the API call sorts by most recently pushed
+    const link = document.createElement('a');
+    link.href = latest.url;
+    link.target = '_blank';
+    link.rel = 'noopener';
+    link.textContent = latest.name;
+    const when = document.createElement('span');
+    when.className = 'github-stat-note';
+    when.textContent = ` \u00B7 ${timeAgo(latest.pushedAt)}`;
+    addStat('Latest push', link, when);
+
+    const counts = {};
+    own.forEach(repo => { if (repo.language) counts[repo.language] = (counts[repo.language] || 0) + 1; });
+    const top = Object.keys(counts).sort((a, b) => counts[b] - counts[a]).slice(0, 3);
+    if (top.length) addStat('Most used', top.join(', '));
+
+    note.hidden = true;
+    list.hidden = false;
+  }
+
+  const cached = readCache();
+  if (cached) { render(cached); return; }
+
+  fetch(`https://api.github.com/users/${encodeURIComponent(user)}/repos?sort=pushed&per_page=100`, {
+    headers: { Accept: 'application/vnd.github+json' }
+  })
+    .then(response => {
+      if (!response.ok) throw new Error(`GitHub API returned ${response.status}`);
+      return response.json();
+    })
+    .then(data => {
+      // Keep only the fields the strip shows
+      const repos = data.map(repo => ({
+        name: repo.name,
+        url: repo.html_url,
+        fork: repo.fork,
+        language: repo.language,
+        pushedAt: repo.pushed_at
+      }));
+      writeCache(repos);
+      render(repos);
+    })
+    .catch(() => { /* offline or rate-limited: the static text and profile link remain */ });
+})();

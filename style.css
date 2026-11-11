@@ -1537,3 +1537,84 @@ body { transition: background-color 0.4s ease, color 0.4s ease; }
   .project-dialog-body { padding: 1.2rem 1.1rem 1.4rem; }
   .project-dialog-close { right: -6px; }
 }
+
+/* ===================================================
+   GITHUB STRIP — live numbers from the GitHub API
+=================================================== */
+.github-strip {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 1.2rem 1.6rem;
+  margin-top: 2.5rem;
+  padding: 1.5rem 1.8rem;
+  border: 2px dashed var(--blue);
+  border-radius: var(--radius);
+  background: var(--white);
+}
+
+.github-strip-icon { flex-shrink: 0; }
+
+.github-strip-text {
+  flex: 1 1 200px;
+  min-width: 0;
+}
+
+.github-strip-text h3 { margin: 0 0 0.3rem; }
+
+.github-strip-text p { margin: 0; }
+
+.github-stats {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.8rem 2.2rem;
+  margin: 0.4rem 0 0;
+}
+
+.github-stats div { min-width: 0; }
+
+.github-stats dt {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--blue-text);
+}
+
+.github-stats dd {
+  margin: 0.1rem 0 0;
+  font-weight: 700;
+  overflow-wrap: anywhere;
+}
+
+.github-stats dd a {
+  color: var(--coral-text);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.github-stats .github-stat-note { font-weight: 400; }
+
+.github-strip-link {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  padding: 0.5rem 1.2rem;
+  border-radius: 999px;
+  border: 2px solid var(--plum);
+  color: var(--plum);
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  font-weight: 700;
+  transition: background 0.2s ease, color 0.2s ease;
+}
+
+.github-strip-link:hover,
+.github-strip-link:focus-visible {
+  background: var(--plum);
+  color: var(--white);
+}
+
+@media (max-width: 560px) {
+  .github-strip { padding: 1.3rem 1.2rem; }
+}
