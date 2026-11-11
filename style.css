@@ -674,6 +674,33 @@ main:focus { outline: none; }
   background: var(--sand);
 }
 
+/* The featured card is full width, so its screenshot sits beside the text on wide screens */
+@media (min-width: 860px) {
+  .island-card--featured:has(> .island-shot) {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    column-gap: 2rem;
+    align-content: start;
+  }
+
+  .island-card--featured > * {
+    grid-column: 1;
+    justify-self: start;
+  }
+
+  .island-card--featured > .island-shot {
+    grid-column: 2;
+    grid-row: 1 / span 8;
+    justify-self: stretch;
+    align-self: center;
+    width: 100%;
+    margin: 0;
+    object-position: center;
+    border: 1px solid var(--sand);
+    border-radius: 12px;
+  }
+}
+
 .skill-tags {
   display: flex;
   flex-wrap: wrap;
