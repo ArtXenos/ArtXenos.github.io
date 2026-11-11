@@ -749,13 +749,16 @@ main:focus { outline: none; }
   background: var(--sand);
 }
 
-/* The featured card is full width, so its screenshot sits beside the text on wide screens */
+/* The featured card is full width, so on wide screens its screenshot fills the right half edge to edge */
 @media (min-width: 860px) {
   .island-card--featured:has(> .island-shot) {
     display: grid;
-    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
-    column-gap: 2rem;
-    align-content: start;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1.1fr);
+    column-gap: 2.5rem;
+    align-content: center;
+    min-height: 24rem;
+    padding: 2.5rem;
+    overflow: hidden;
   }
 
   .island-card--featured > * {
@@ -763,16 +766,23 @@ main:focus { outline: none; }
     justify-self: start;
   }
 
+  .island-card--featured > h3 { font-size: 1.7rem; }
+
+  .island-card--featured > p { font-size: 1.05rem; }
+
   .island-card--featured > .island-shot {
     grid-column: 2;
     grid-row: 1 / span 8;
     justify-self: stretch;
-    align-self: center;
-    width: 100%;
-    margin: 0;
+    align-self: stretch;
+    width: calc(100% + 2.5rem);
+    height: calc(100% + 5rem);
+    aspect-ratio: auto;
+    margin: -2.5rem -2.5rem -2.5rem 0;
     object-position: center;
-    border: 1px solid var(--sand);
-    border-radius: 12px;
+    border: none;
+    border-left: 1px solid var(--sand);
+    border-radius: 0;
   }
 }
 
