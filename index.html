@@ -22,14 +22,19 @@
   <link rel="apple-touch-icon" href="apple-touch-icon.png">
   <!-- Set the theme before the page paints so there is no flash of the wrong one -->
   <script>
-    (function () {
-      var theme;
-      try { theme = localStorage.getItem('theme'); } catch (e) { /* storage blocked */ }
-      if (theme !== 'night' && theme !== 'sunset') {
-        theme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'night' : 'sunset';
-      }
-      document.documentElement.setAttribute('data-theme', theme);
-    })();
+    // The visitor's own choice ("day" or "night") wins; otherwise a dark device gets the night sky
+    // and everyone else gets the sky that matches their local time.
+    window.pickTheme = function () {
+      var hour = new Date().getHours();
+      var daySky = hour >= 5 && hour < 8 ? 'dawn' : hour >= 8 && hour < 16 ? 'midday' : 'sunset';
+      var choice;
+      try { choice = localStorage.getItem('theme'); } catch (e) { /* storage blocked */ }
+      if (choice === 'night') return 'night';
+      if (choice === 'day' || choice === 'sunset') return daySky;
+      if (window.matchMedia('(prefers-color-scheme: dark)').matches) return 'night';
+      return hour >= 5 && hour < 19 ? daySky : 'night';
+    };
+    document.documentElement.setAttribute('data-theme', window.pickTheme());
   </script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>

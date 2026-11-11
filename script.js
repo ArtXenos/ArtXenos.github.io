@@ -408,38 +408,43 @@ sections.forEach(section => observer.observe(section));
         trapFocus(e);
     });
 })();
-// ===== Theme toggle: sunset (light) and night (dark) =====
+// ===== Theme: a time-of-day sky (dawn, midday, sunset, night) with a day/night toggle =====
 (function () {
   const toggle = document.getElementById('themeToggle');
-  if (!toggle) return;
+  if (!toggle || typeof window.pickTheme !== 'function') return;
   const root = document.documentElement;
   const themeColor = document.querySelector('meta[name="theme-color"]');
   const darkQuery = window.matchMedia('(prefers-color-scheme: dark)');
-
-  function storedTheme() {
-    try { return localStorage.getItem('theme'); } catch (err) { return null; }
-  }
+  const SKY_COLORS = { dawn: '#BFD4EE', midday: '#8CC4EC', sunset: '#F7B9A6', night: '#151233' };
 
   function applyTheme(theme) {
     root.setAttribute('data-theme', theme);
-    const isNight = theme === 'night';
-    toggle.setAttribute('aria-label', isNight ? 'Switch to sunset theme' : 'Switch to night theme');
-    if (themeColor) themeColor.setAttribute('content', isNight ? '#151233' : '#F7B9A6');
+    toggle.setAttribute('aria-label', theme === 'night' ? 'Switch to day theme' : 'Switch to night theme');
+    if (themeColor) themeColor.setAttribute('content', SKY_COLORS[theme]);
   }
 
-  applyTheme(root.getAttribute('data-theme') === 'night' ? 'night' : 'sunset');
+  // pickTheme() is defined in the <head> so the first paint already has the right sky
+  function refresh() {
+    const theme = window.pickTheme();
+    if (theme !== root.getAttribute('data-theme')) applyTheme(theme);
+  }
+
+  applyTheme(window.pickTheme());
   toggle.hidden = false;
 
   toggle.addEventListener('click', () => {
-    const next = root.getAttribute('data-theme') === 'night' ? 'sunset' : 'night';
-    applyTheme(next);
-    try { localStorage.setItem('theme', next); } catch (err) { /* storage blocked: theme still applies for this visit */ }
+    const choice = root.getAttribute('data-theme') === 'night' ? 'day' : 'night';
+    try { localStorage.setItem('theme', choice); } catch (err) { /* storage blocked */ }
+    // Without storage the choice can't be read back, so apply it directly for this visit
+    let stored = null;
+    try { stored = localStorage.getItem('theme'); } catch (err) { /* storage blocked */ }
+    if (stored === choice) refresh();
+    else applyTheme(choice === 'night' ? 'night' : 'sunset');
   });
 
-  // Follow the device setting until the visitor picks a theme themselves
-  darkQuery.addEventListener('change', (e) => {
-    if (!storedTheme()) applyTheme(e.matches ? 'night' : 'sunset');
-  });
+  // Follow the device setting, and move the sky along if the page stays open for hours
+  darkQuery.addEventListener('change', refresh);
+  document.addEventListener('visibilitychange', () => { if (!document.hidden) refresh(); });
 })();
 
 // ===== Scroll progress bar and back-to-top button =====

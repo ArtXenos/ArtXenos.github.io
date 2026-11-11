@@ -1438,6 +1438,46 @@ body { transition: background-color 0.4s ease, color 0.4s ease; }
 }
 
 /* ===================================================
+   DAWN AND MIDDAY SKIES
+   Picked from the visitor's local time. Only the hero changes; the rest of the page keeps the light palette.
+=================================================== */
+[data-theme="dawn"] .sky-layer {
+  background: linear-gradient(to bottom, #BFD4EE 0%, #F4CFCB 50%, #FBE3B5 100%);
+}
+
+/* The dawn sun is pale and rises from the waves, to the side of the text */
+[data-theme="dawn"] .sun {
+  top: 56%;
+  left: 24%;
+  background: radial-gradient(circle at 35% 35%, #FFFBEA, #F9C98A 72%);
+  box-shadow: 0 0 90px 26px rgba(249, 201, 138, 0.5);
+}
+
+[data-theme="midday"] .sky-layer {
+  background: linear-gradient(to bottom, #8CC4EC 0%, #BFE0F5 60%, #E6F4FB 100%);
+}
+
+/* The midday sun is small, bright and high, beside the heading instead of behind it */
+[data-theme="midday"] .sun {
+  top: 13%;
+  left: 80%;
+  width: 110px;
+  height: 110px;
+  background: radial-gradient(circle at 35% 35%, #FFFDF0, #FFD768 72%);
+  box-shadow: 0 0 80px 24px rgba(255, 221, 120, 0.6);
+}
+
+[data-theme="midday"] .horizon--far path { fill: rgba(86, 150, 200, 0.5); }
+
+@media (max-width: 560px) {
+  [data-theme="midday"] .sun {
+    top: 11%;
+    width: 80px;
+    height: 80px;
+  }
+}
+
+/* ===================================================
    NIGHT THEME — moonlit shore
    The palette tokens are remapped, so most components follow automatically.
    Text colours below keep at least 4.5:1 contrast on the night surfaces.

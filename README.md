@@ -16,10 +16,10 @@ This repository contains my personal developer portfolio, built as a prelim proj
 ## Features
 - Achievements & Experience laid out as a timeline along a dashed "shoreline", alternating sides on wide screens
 - Custom lightbox photo gallery for each achievement, with keyboard navigation (arrow keys, Esc), dot indicators, and focus management
-- Animated sunset sky with a bouncing sun and continuously flowing wave layers, all in pure CSS
+- Animated sky with a bouncing sun and continuously flowing wave layers, all in pure CSS
 - Fully responsive layout with a collapsible mobile nav menu
 - Scroll-based nav highlighting so the active section is always visible in the menu
-- Sunset and night themes with a toggle in the nav — the night theme turns the sun into a moon and adds stars; the choice is remembered, and it follows the device's light/dark setting by default
+- Time-of-day sky — dawn, midday, sunset or night is picked from the visitor's local time (a dark-mode device gets night). The toggle in the nav switches between day and night, and the choice is remembered
 - Screenshots on the software project cards (lazy-loaded WebP)
 - Project detail view — a "Details" button on each software project opens a dialog with a larger screenshot, highlights, the stack and links
 - Project filters (All, Web apps, Java, Research & Capstone) with a live count
