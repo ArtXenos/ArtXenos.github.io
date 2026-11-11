@@ -414,6 +414,29 @@ main:focus { outline: none; }
   transform: translateY(-3px) rotate(-2deg);
 }
 
+/* Each site's logo in its own brand colour */
+.shell-icon {
+  flex-shrink: 0;
+  color: var(--brand, currentColor);
+}
+
+.shell-link[data-brand="github"] { --brand: #181717; }
+.shell-link[data-brand="linkedin"] { --brand: #0A66C2; }
+.shell-link[data-brand="facebook"] { --brand: #0866FF; }
+.shell-link[data-brand="instagram"] { --brand: #D62976; }
+.shell-link[data-brand="x"] { --brand: #000000; }
+
+/* Black and dark-blue logos would vanish on the night chips, so lighten them */
+[data-theme="night"] .shell-link[data-brand="github"],
+[data-theme="night"] .shell-link[data-brand="x"] { --brand: #F3EBDD; }
+[data-theme="night"] .shell-link[data-brand="linkedin"] { --brand: #4FA3F0; }
+[data-theme="night"] .shell-link[data-brand="facebook"] { --brand: #5C9DFF; }
+[data-theme="night"] .shell-link[data-brand="instagram"] { --brand: #F27BB0; }
+
+/* On the peach hover the default dark logos read best */
+[data-theme="night"] .shell-link:hover .shell-icon,
+[data-theme="night"] .shell-link:focus-visible .shell-icon { color: #3D3352; }
+
 /* Clear keyboard focus rings on the pastel cards */
 .shell-link:focus-visible,
 .island-link:focus-visible,
@@ -721,6 +744,7 @@ main:focus { outline: none; }
   display: inline-flex;
   align-items: center;
   justify-content: center;
+  gap: 0.55rem;
   min-height: 48px;
   padding: 0.75rem 1.6rem;
   border-radius: 999px;
@@ -752,6 +776,8 @@ main:focus { outline: none; }
   outline: 3px solid var(--white);
   outline-offset: 3px;
 }
+
+.contact-icon { flex-shrink: 0; }
 
 .contact-address {
   margin-top: 1rem;
