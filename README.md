@@ -23,6 +23,7 @@ This repository contains my personal developer portfolio, built as a prelim proj
 - Hero buttons that jump straight to Projects and Contact, a scroll progress bar, and a back-to-top button
 - Cards fade in as they scroll into view
 - "Copy email" button with a confirmation message
+- Sunset-and-wave favicon (SVG, with ICO and Apple touch icon fallbacks)
 - Respects `prefers-reduced-motion` for visitors who prefer minimal animation
 
 ## Tools Used
