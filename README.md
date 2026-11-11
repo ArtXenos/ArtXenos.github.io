@@ -27,6 +27,7 @@ This repository contains my personal developer portfolio, built as a prelim proj
 - Clickable skills — a skill that appears on a project jumps to Projects and shows only the projects that use it
 - Hero buttons that jump straight to Projects and Contact, a scroll progress bar, and a back-to-top button
 - Cards fade in as they scroll into view
+- Small motion details — skill chips bob like buoys on hover, and the hero tagline types itself out once
 - Live GitHub strip under Projects — public repo count, latest push and most-used languages from the GitHub API, with plain text if the request fails
 - "Copy email" button with a confirmation message
 - Sunset-and-wave favicon (SVG, with ICO and Apple touch icon fallbacks)

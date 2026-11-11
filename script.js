@@ -788,3 +788,31 @@ sections.forEach(section => observer.observe(section));
     })
     .catch(() => { /* offline or rate-limited: the static text and profile link remain */ });
 })();
+
+// ===== Type out the hero tagline once =====
+(function () {
+  const tagline = document.querySelector('.hero-tagline');
+  if (!tagline) return;
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+  // Collapse the line breaks and indentation from the HTML source
+  const text = tagline.textContent.replace(/\s+/g, ' ').trim();
+  const typed = document.createElement('span');
+  typed.className = 'tagline-typed';
+  const rest = document.createElement('span');
+  rest.className = 'tagline-rest';
+  rest.textContent = text;
+  // Both spans together always hold the full sentence, so screen readers and copy-paste get all of it
+  tagline.replaceChildren(typed, rest);
+
+  let index = 0;
+  function typeNext() {
+    index++;
+    typed.textContent = text.slice(0, index);
+    rest.textContent = text.slice(index);
+    if (index < text.length) setTimeout(typeNext, 28);
+    else setTimeout(() => tagline.classList.add('is-typed'), 1500);
+  }
+
+  setTimeout(typeNext, 600);
+})();
