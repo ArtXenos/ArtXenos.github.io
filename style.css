@@ -588,6 +588,81 @@ main:focus { outline: none; }
   letter-spacing: 0.03em;
 }
 
+/* Timeline: the cards hang off a dashed "shoreline", each marked by its icon */
+.chest-timeline {
+  display: block;
+  position: relative;
+  padding-left: 3.8rem;
+}
+
+.chest-timeline::before {
+  content: "";
+  position: absolute;
+  top: 0.6rem;
+  bottom: 0.6rem;
+  left: 1.4rem;
+  border-left: 3px dashed var(--blue);
+  translate: -50% 0;
+}
+
+.chest-timeline .chest-card {
+  position: relative;
+  margin-bottom: 1.4rem;
+}
+
+.chest-timeline .chest-card:last-child { margin-bottom: 0; }
+
+.chest-timeline .chest-icon {
+  position: absolute;
+  top: 1.4rem;
+  left: -3.8rem;
+  display: grid;
+  place-items: center;
+  width: 2.8rem;
+  height: 2.8rem;
+  margin: 0;
+  border: 3px solid var(--coral);
+  border-radius: 50%;
+  background: var(--white);
+  font-size: 1.25rem;
+  line-height: 1;
+  box-shadow: 0 6px 14px rgba(61, 51, 82, 0.12);
+}
+
+/* A small pointer from each card towards the line */
+.chest-timeline .chest-card::before {
+  content: "";
+  position: absolute;
+  top: 2.3rem;
+  left: -0.5rem;
+  width: 1rem;
+  height: 1rem;
+  background: var(--white);
+  rotate: 45deg;
+}
+
+/* Wide screens: the line runs down the middle and cards alternate sides */
+@media (min-width: 900px) {
+  .chest-timeline { padding-left: 0; }
+
+  .chest-timeline::before { left: 50%; }
+
+  .chest-timeline .chest-card {
+    width: calc(50% - 2.8rem);
+    margin-bottom: 0;
+  }
+
+  .chest-timeline .chest-card + .chest-card { margin-top: -3.5rem; }
+
+  .chest-timeline .chest-card:nth-child(odd) { margin-right: auto; }
+  .chest-timeline .chest-card:nth-child(even) { margin-left: auto; }
+
+  .chest-timeline .chest-card:nth-child(odd) .chest-icon { left: auto; right: -4.2rem; }
+  .chest-timeline .chest-card:nth-child(even) .chest-icon { left: -4.2rem; }
+
+  .chest-timeline .chest-card:nth-child(odd)::before { left: auto; right: -0.5rem; }
+}
+
 /* ===================================================
    COURSE ACTIVITIES — postcards
 =================================================== */
