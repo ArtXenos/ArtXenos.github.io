@@ -344,6 +344,16 @@
               (BIR 1601-C, Form 2316, 13th month pay), and runs payroll through a Draft → Processed → Approved → Paid
               workflow with role-based access for employees, HR, the General Manager and administrators. Secured with
               BCrypt passwords, CSRF protection, login lockout and an audit log.</p>
+            <div class="island-details" hidden>
+              <h4>Highlights</h4>
+              <ul>
+                <li>Payroll moves from Draft to Processed, is approved by the General Manager, then marked Paid — and every payroll keeps a record of how it was calculated.</li>
+                <li>Paid payroll is never edited. An underpayment or overpayment is recorded and settled in a later payroll.</li>
+                <li>Four roles — Employee, HR Manager, General Manager and Administrator — with the checks done on the server.</li>
+                <li>Payslips print on screen or download as PDF; SSS, PhilHealth and Pag-IBIG tables export as CSV.</li>
+                <li>Automated tests run on an in-memory H2 database, so they never touch the real MariaDB data.</li>
+              </ul>
+            </div>
             <div class="skill-tags">
               <span>Java</span><span>Spring Boot</span><span>Spring Security</span><span>Spring Data JPA</span>
               <span>MariaDB</span><span>JUnit 5</span><span>Mockito</span>
@@ -359,6 +369,17 @@
             <p>An online shop for handmade fuzzy-wire bouquets, keychains and figurines. Customers order for local
               delivery or pickup, pay by GCash or cash, and track their orders; the owner runs everything from an admin
               dashboard. Rebuilt from my earlier Flask + SQLite version.</p>
+            <div class="island-details" hidden>
+              <h4>Highlights</h4>
+              <ul>
+                <li>The cart is kept in the browser, so customers can shop before signing up.</li>
+                <li>GCash orders show the shop’s payment details and the customer uploads a payment screenshot.</li>
+                <li>Stock goes down at checkout and back up when an order is declined, cancelled or expires.</li>
+                <li>Orders left unconfirmed without a receipt are cancelled automatically after 48 hours.</li>
+                <li>Product photos can be taken from the phone camera; they are shrunk and their location data removed before upload.</li>
+                <li>Covered by unit tests, 100 database tests and Playwright browser tests.</li>
+              </ul>
+            </div>
             <div class="skill-tags">
               <span>Next.js</span><span>TypeScript</span><span>Supabase</span><span>PostgreSQL</span>
               <span>Tailwind CSS</span><span>Zod</span><span>Vitest</span><span>Playwright</span>
@@ -375,6 +396,18 @@
             <p>A cash register web app for small businesses. Owners record sales and expenses, then get insights like
               net profit, profit margin, cash runway and break-even point, with plain-language tips based on their own
               numbers.</p>
+            <div class="island-details" hidden>
+              <h4>My role</h4>
+              <p>Front-end developer, UI developer and project coordinator in a team of three.</p>
+              <h4>Highlights</h4>
+              <ul>
+                <li>A quick register for sales and expenses with amount, description, category and date.</li>
+                <li>Insights for total revenue, expenses, net profit, profit margin and cash on hand.</li>
+                <li>Guidance on runway, gross margin and break-even, plus a warning when cash covers less than three months of expenses.</li>
+                <li>History with CSV export, and settings for the opening balance and currency symbol.</li>
+                <li>Light and dark mode, keyboard navigation and screen-reader labels.</li>
+              </ul>
+            </div>
             <div class="skill-tags">
               <span>React</span><span>Vite</span><span>React Router</span><span>Team Project</span>
             </div>
@@ -389,6 +422,16 @@
             <h3>Income Category Ledger</h3>
             <p>A refactor of a vanilla JavaScript DOM app into a modular React application, adding inline validation
               messages, keyboard shortcuts and a cleaner component structure.</p>
+            <div class="island-details" hidden>
+              <h4>Highlights</h4>
+              <ul>
+                <li>Inline error messages under each field instead of alert boxes.</li>
+                <li>Summary cards for the monthly total, yearly projection and top income source.</li>
+                <li>Sort by name, amount or date; search; and edit a category directly in the table.</li>
+                <li>A confirmation dialog before any delete, and export to CSV.</li>
+                <li>All state lives in one component; the others only display what they are given.</li>
+              </ul>
+            </div>
             <div class="skill-tags">
               <span>React</span><span>Vite</span><span>Bootstrap</span><span>Vercel</span>
             </div>
@@ -403,9 +446,20 @@
             <h3>Lost and Found Management System</h3>
             <p>The Lost and Found Management System replaces paper logs with a digital registry that tracks misplaced
               items through Java-based interface, real-time record management, and JSON data storage.</p>
+            <div class="island-details" hidden>
+              <h4>Highlights</h4>
+              <ul>
+                <li>Records are kept in a table with the date, item, description, requester, last known location, and Found and Retrieved checkboxes.</li>
+                <li>Click a column header to sort, or type in the search box to filter the table as you type.</li>
+                <li>Add, edit and delete records from the menu or with keyboard shortcuts.</li>
+                <li>Save the table to a JSON file and load it back later.</li>
+              </ul>
+            </div>
             <div class="skill-tags"><span>Java Swing</span><span>JSON</span></div>
-            <a href="Portfolio/Lost and Found Management System.pdf" target="_blank" rel="noopener"
+            <div class="island-links">
+              <a href="Portfolio/Lost and Found Management System.pdf" target="_blank" rel="noopener"
               class="island-link">View PDF<span class="sr-only"> of Lost and Found Management System,</span> <span class="file-size">(1.1 MB)</span></a>
+            </div>
           </article>
           <article class="island-card" data-category="java">
             <img src="Portfolio/projects/movie-ticket.webp" alt="Movie Ticket Booking System console menu listing movies and showtimes" class="island-shot"
@@ -413,8 +467,19 @@
             <h3>Movie Ticket Booking System</h3>
             <p>A Java desktop application that streamlines movie ticket reservations by allowing users to browse
               showtimes, select seats, and manage their bookings through an intuitive interface.</p>
+            <div class="island-details" hidden>
+              <h4>Highlights</h4>
+              <ul>
+                <li>Choose a movie and a showtime from the console menu.</li>
+                <li>Book one to five seats at a time from a visual seat layout.</li>
+                <li>Seat reservations are saved to a file, so booked seats stay booked after a restart.</li>
+                <li>Invalid input is caught and the question is asked again.</li>
+              </ul>
+            </div>
             <div class="skill-tags"><span>Java</span></div>
-            <a href="Portfolio/Movie Ticketing System (1).pdf" target="_blank" rel="noopener" class="island-link">View PDF<span class="sr-only"> of Movie Ticket Booking System,</span> <span class="file-size">(368 KB)</span></a>
+            <div class="island-links">
+              <a href="Portfolio/Movie Ticketing System (1).pdf" target="_blank" rel="noopener" class="island-link">View PDF<span class="sr-only"> of Movie Ticket Booking System,</span> <span class="file-size">(368 KB)</span></a>
+            </div>
           </article>
         </div>
 
@@ -529,6 +594,13 @@
       </div>
     </div>
   </div>
+
+  <!-- ===== PROJECT DETAILS ===== -->
+  <dialog class="project-dialog" id="projectDialog" aria-labelledby="projectDialogTitle">
+    <button type="button" class="lightbox-close project-dialog-close" id="projectDialogClose"
+      aria-label="Close project details">&times;</button>
+    <div class="project-dialog-body" id="projectDialogBody"></div>
+  </dialog>
 
 </body>
 

@@ -559,3 +559,70 @@ sections.forEach(section => observer.observe(section));
       .catch(() => showToast('Could not copy — select the address below instead'));
   });
 })();
+
+// ===== Project details dialog =====
+(function () {
+  const dialog = document.getElementById('projectDialog');
+  const body = document.getElementById('projectDialogBody');
+  const closeBtn = document.getElementById('projectDialogClose');
+  if (!dialog || !body || !closeBtn || typeof dialog.showModal !== 'function') return;
+
+  function openDetails(card) {
+    body.textContent = '';
+
+    const shot = card.querySelector('.island-shot');
+    if (shot) {
+      const img = shot.cloneNode();
+      img.className = 'project-dialog-shot';
+      img.removeAttribute('loading');
+      body.appendChild(img);
+    }
+
+    const title = document.createElement('h2');
+    title.id = 'projectDialogTitle';
+    title.textContent = card.querySelector('h3').textContent.trim();
+    body.appendChild(title);
+
+    const summary = card.querySelector(':scope > p');
+    if (summary) body.appendChild(summary.cloneNode(true));
+
+    card.querySelectorAll('.island-details > *').forEach(el => body.appendChild(el.cloneNode(true)));
+
+    const tags = card.querySelector('.skill-tags');
+    if (tags) body.appendChild(tags.cloneNode(true));
+
+    const links = card.querySelector('.island-links');
+    if (links) {
+      const copy = links.cloneNode(true);
+      copy.querySelectorAll('.island-more').forEach(el => el.remove());
+      body.appendChild(copy);
+    }
+
+    document.body.style.overflow = 'hidden';
+    dialog.showModal();
+    body.scrollTop = 0;
+  }
+
+  // Only cards that carry extra details get a button
+  document.querySelectorAll('#projects .island-card').forEach(card => {
+    const details = card.querySelector('.island-details');
+    const links = card.querySelector('.island-links');
+    if (!details || !links) return;
+
+    const button = document.createElement('button');
+    button.type = 'button';
+    button.className = 'island-link island-more';
+    button.textContent = 'Details';
+    const context = document.createElement('span');
+    context.className = 'sr-only';
+    context.textContent = ` about ${card.querySelector('h3').textContent.trim()}`;
+    button.appendChild(context);
+    button.addEventListener('click', () => openDetails(card));
+    links.prepend(button);
+  });
+
+  closeBtn.addEventListener('click', () => dialog.close());
+  // A click on the backdrop lands on the dialog element itself
+  dialog.addEventListener('click', (e) => { if (e.target === dialog) dialog.close(); });
+  dialog.addEventListener('close', () => { document.body.style.overflow = ''; });
+})();

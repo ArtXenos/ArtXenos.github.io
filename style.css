@@ -1413,3 +1413,99 @@ body { transition: background-color 0.4s ease, color 0.4s ease; }
   .filter-chip { flex: 1 1 auto; }
   .to-top { right: 0.8rem; bottom: 0.8rem; }
 }
+
+/* ===================================================
+   PROJECT DETAILS DIALOG
+=================================================== */
+.island-more {
+  background: none;
+  border: none;
+  font-family: var(--font-body);
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+.project-dialog {
+  width: min(720px, calc(100vw - 2rem));
+  max-height: calc(100vh - 3rem);
+  max-height: calc(100dvh - 3rem);
+  padding: 0;
+  border: none;
+  border-top: 6px solid var(--coral);
+  border-radius: var(--radius);
+  background: var(--white);
+  color: var(--plum);
+  box-shadow: 0 24px 60px rgba(61, 51, 82, 0.35);
+  overflow: visible;
+}
+
+.project-dialog::backdrop {
+  background: rgba(61, 51, 82, 0.82);
+  backdrop-filter: blur(6px);
+}
+
+.project-dialog[open] { animation: dialog-in 0.25s ease; }
+
+@keyframes dialog-in {
+  from { opacity: 0; transform: translateY(16px) scale(0.97); }
+  to { opacity: 1; transform: none; }
+}
+
+.project-dialog-close {
+  top: -22px;
+  right: -14px;
+  z-index: 1;
+}
+
+.project-dialog-body {
+  max-height: calc(100vh - 3rem - 6px);
+  max-height: calc(100dvh - 3rem - 6px);
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  padding: 1.6rem 1.8rem 1.8rem;
+  border-radius: 0 0 var(--radius) var(--radius);
+}
+
+.project-dialog-shot {
+  display: block;
+  width: 100%;
+  height: auto;
+  margin-bottom: 1.3rem;
+  border-radius: 12px;
+  border: 1px solid var(--sand);
+  background: var(--sand);
+}
+
+.project-dialog-body h2 {
+  font-size: 1.5rem;
+  margin: 0 0 0.7rem;
+}
+
+.project-dialog-body h4 {
+  margin: 1.4rem 0 0.4rem;
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--blue-text);
+}
+
+.project-dialog-body p { margin: 0 0 0.6rem; }
+
+.project-dialog-body ul {
+  margin: 0;
+  padding-left: 1.2rem;
+}
+
+.project-dialog-body li { margin-bottom: 0.45rem; }
+
+.project-dialog-body li::marker { color: var(--coral-text); }
+
+.project-dialog-body .skill-tags { margin: 1.4rem 0 0.6rem; }
+
+[data-theme="night"] .project-dialog::backdrop { background: rgba(12, 9, 28, 0.85); }
+
+@media (max-width: 560px) {
+  .project-dialog-body { padding: 1.2rem 1.1rem 1.4rem; }
+  .project-dialog-close { right: -6px; }
+}
