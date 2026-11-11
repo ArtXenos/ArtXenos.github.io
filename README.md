@@ -19,6 +19,7 @@ This repository contains my personal developer portfolio, built as a prelim proj
 - Fully responsive layout with a collapsible mobile nav menu
 - Scroll-based nav highlighting so the active section is always visible in the menu
 - Sunset and night themes with a toggle in the nav — the night theme turns the sun into a moon and adds stars; the choice is remembered, and it follows the device's light/dark setting by default
+- Screenshots on the software project cards (lazy-loaded WebP)
 - Project filters (All, Web apps, Java, Research & Capstone) with a live count
 - Hero buttons that jump straight to Projects and Contact, a scroll progress bar, and a back-to-top button
 - Cards fade in as they scroll into view
