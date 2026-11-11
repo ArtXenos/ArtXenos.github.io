@@ -17,6 +17,7 @@ This repository contains my personal developer portfolio, built as a prelim proj
 - Achievements & Experience laid out as a timeline along a dashed "shoreline", alternating sides on wide screens
 - Custom lightbox photo gallery for each achievement, with keyboard navigation (arrow keys, Esc), dot indicators, and focus management
 - Animated sky with a bouncing sun and continuously flowing wave layers, all in pure CSS
+- Wave dividers between sections, in pure CSS
 - Fully responsive layout with a collapsible mobile nav menu
 - Scroll-based nav highlighting so the active section is always visible in the menu
 - Time-of-day sky — dawn, midday, sunset or night is picked from the visitor's local time (a dark-mode device gets night). The toggle in the nav switches between day and night, and the choice is remembered

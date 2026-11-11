@@ -1438,6 +1438,48 @@ body { transition: background-color 0.4s ease, color 0.4s ease; }
 }
 
 /* ===================================================
+   SECTION DIVIDERS
+   Where the background colour changes, the section above laps over the next one in a wave
+   (the same shape as the footer wave), painted in the colour of the section above.
+=================================================== */
+.section--skills,
+.section--chest,
+.section--islands {
+  position: relative;
+  --wave-color: var(--sand);
+}
+
+.section--skills { --wave-color: var(--sand-light); }
+
+.section--skills::before,
+.section--chest::before,
+.section--islands::before {
+  content: "";
+  position: absolute;
+  top: -1px;
+  left: 0;
+  width: 100%;
+  height: 4.5rem;
+  background: var(--wave-color);
+  -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 100' preserveAspectRatio='none'%3E%3Cpath d='M0,0 L1440,0 L1440,40 C1200,95 960,10 720,50 C480,90 240,15 0,60 Z'/%3E%3C/svg%3E") center / 100% 100% no-repeat;
+  mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 100' preserveAspectRatio='none'%3E%3Cpath d='M0,0 L1440,0 L1440,40 C1200,95 960,10 720,50 C480,90 240,15 0,60 Z'/%3E%3C/svg%3E") center / 100% 100% no-repeat;
+  pointer-events: none;
+}
+
+/* Mirror every other wave so they don't all look the same */
+.section--chest::before { scale: -1 1; }
+
+.section--skills > .section-inner,
+.section--chest > .section-inner,
+.section--islands > .section-inner { padding-top: 7.5rem; }
+
+@supports not ((mask: url("")) or (-webkit-mask: url(""))) {
+  .section--skills::before,
+  .section--chest::before,
+  .section--islands::before { display: none; }
+}
+
+/* ===================================================
    DAWN AND MIDDAY SKIES
    Picked from the visitor's local time. Only the hero changes; the rest of the page keeps the light palette.
 =================================================== */
