@@ -816,3 +816,51 @@ sections.forEach(section => observer.observe(section));
 
   setTimeout(typeNext, 600);
 })();
+
+// ===== Contact form: send through Formspree without leaving the page =====
+// Without JavaScript the form still works: it posts normally and Formspree shows its own thank-you page.
+(function () {
+  const form = document.getElementById('contactForm');
+  const button = document.getElementById('contactSubmit');
+  const status = document.getElementById('contactStatus');
+  if (!form || !button || !status || !window.fetch || !window.FormData) return;
+
+  function setStatus(message, isError) {
+    status.textContent = message;
+    status.classList.toggle('is-error', Boolean(isError));
+  }
+
+  form.addEventListener('submit', (e) => {
+    e.preventDefault();
+    if (button.disabled) return;
+
+    button.disabled = true;
+    button.textContent = 'Sending…';
+    setStatus('');
+
+    fetch(form.action, {
+      method: 'POST',
+      body: new FormData(form),
+      headers: { Accept: 'application/json' }
+    })
+      .then(response => {
+        if (response.ok) {
+          form.reset();
+          setStatus('Thanks — your message is on its way. I’ll reply by email.');
+          return;
+        }
+        // Formspree explains what was wrong (for example an invalid email address)
+        return response.json().then(data => {
+          const details = data && data.errors ? data.errors.map(error => error.message).join(', ') : '';
+          setStatus(details || 'The message could not be sent. Please try again, or email me directly.', true);
+        });
+      })
+      .catch(() => {
+        setStatus('The message could not be sent. Check your connection, or email me directly.', true);
+      })
+      .finally(() => {
+        button.disabled = false;
+        button.textContent = 'Send message';
+      });
+  });
+})();
