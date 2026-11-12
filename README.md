@@ -14,7 +14,7 @@ This repository contains my personal developer portfolio, built as a prelim proj
 - **Projects** — software projects (Em-Ployger, Skye Crafts, Kita Kita, Income Category Ledger, and Java desktop apps) with live demo and code links, plus capstone systems (SAKTO, PAPER, SLOPE, OUTAGE) and research projects
 
 ## Features
-- Achievements & Experience laid out as a dated timeline along a dashed "shoreline", newest first, alternating sides on wide screens
+- Achievements & Experience laid out as a dated timeline along a dashed "shoreline", current roles first, alternating sides on wide screens
 - Custom lightbox photo gallery for each achievement, with keyboard navigation (arrow keys, Esc), dot indicators, and focus management
 - Animated sky with a bouncing sun and continuously flowing wave layers, all in pure CSS
 - Wave dividers between sections, in pure CSS
