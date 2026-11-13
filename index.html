@@ -342,6 +342,7 @@
           <button type="button" class="filter-chip" data-filter="all" aria-pressed="true">All</button>
           <button type="button" class="filter-chip" data-filter="web" aria-pressed="false">Web apps</button>
           <button type="button" class="filter-chip" data-filter="java" aria-pressed="false">Java</button>
+          <button type="button" class="filter-chip" data-filter="python" aria-pressed="false">Python</button>
           <button type="button" class="filter-chip" data-filter="research" aria-pressed="false">Research &amp; Capstone</button>
         </div>
         <p class="filter-status" id="filterStatus" role="status"></p>
@@ -452,6 +453,32 @@
             <div class="island-links">
               <a href="https://income-ledger-react.vercel.app/" target="_blank" rel="noopener" class="island-link">Live<span class="sr-only"> site: Income Category Ledger</span></a>
               <a href="https://github.com/ArtXenos/finals-tla-2" target="_blank" rel="noopener" class="island-link">Code<span class="sr-only"> for Income Category Ledger on GitHub</span></a>
+            </div>
+          </article>
+          <article class="island-card" data-category="python">
+            <img src="Portfolio/projects/blood-unit-locator.webp" alt="Emergency Blood Unit Locator window listing compatible blood units for an A+ patient, nearest hospital first" class="island-shot"
+              width="982" height="639" loading="lazy" decoding="async">
+            <h3>Emergency Blood Unit Locator</h3>
+            <p>A desktop app that finds compatible blood for a patient in an emergency. It reads the blood stock
+              reported by hospitals, drops empty and expired units, and lists every unit the patient can safely
+              receive with the nearest hospital first. Merge Sort and Binary Search are written by hand, with no
+              built-in sorting or searching. Built as my Algorithms course final project, using fictional hospital
+              data.</p>
+            <div class="island-details" hidden>
+              <h4>Highlights</h4>
+              <ul>
+                <li>The registry is sorted by blood type once, then two binary searches find the first and last unit of each compatible donor type.</li>
+                <li>A second, stable Merge Sort orders the matches by distance, so hospitals at the same distance keep their order.</li>
+                <li>A Trace tab shows each merge and every low / mid / high step of the search on a small sample.</li>
+                <li>Bad CSV rows — a missing value, an unknown blood type, a wrong date — are skipped and reported instead of crashing the program.</li>
+                <li>Covered by 72 unit tests that use a fixed date, so results never depend on the real clock.</li>
+              </ul>
+            </div>
+            <div class="skill-tags">
+              <span>Python</span><span>Tkinter</span><span>Merge Sort</span><span>Binary Search</span><span>unittest</span>
+            </div>
+            <div class="island-links">
+              <a href="https://github.com/ArtXenos/blood-unit-locator" target="_blank" rel="noopener" class="island-link">Code<span class="sr-only"> for Emergency Blood Unit Locator on GitHub</span></a>
             </div>
           </article>
           <article class="island-card" data-category="java">
